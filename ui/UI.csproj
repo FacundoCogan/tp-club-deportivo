@@ -47,14 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="ClubForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ClubForm.Designer.cs">
+      <DependentUpon>ClubForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NuevoSocioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevoSocioForm.Designer.cs">
+      <DependentUpon>NuevoSocioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ClubForm.resx">
+      <DependentUpon>ClubForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoSocioForm.resx">
+      <DependentUpon>NuevoSocioForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,5 +90,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{5d025dcb-cc33-4579-91e3-a9c9205ddc6b}</Project>
+      <Name>Negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
