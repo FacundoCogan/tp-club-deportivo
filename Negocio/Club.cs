@@ -1,31 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Negocio
 {
     public class Club
     {
-        public List<Socio> Socios { get; set; }
-        public List<Profesor> Profesores { get; set; }
-        public List<Actividad> Actividades { get; set; }
-
-        public Club()
-        {
-            Socios = new List<Socio>();
-            Profesores = new List<Profesor>();
-            Actividades = new List<Actividad>();
-        }
+        public List<Socio> Socios { get; } = new List<Socio>();
+        public List<Profesor> Profesores { get; } = new List<Profesor>();
+        public List<Actividad> Actividades { get; } = new List<Actividad>();
 
         public void AgregarActividad(Actividad actividad) { }
         public void EditarActividad(Actividad actividad) { }
         public void EliminarActividad(Actividad actividad) { }
 
-        public void CrearSocio(Socio socio)
+        public void CrearSocio(string dni, string nombre, string apellido)
         {
+            if (Socios.Exists(s => s.DNI == dni))
+            {
+                throw new Exception("Ya existe un socio con ese DNI");
+            }
 
-            Socios.Add(socio);
+            Socios.Add(new Socio
+            {
+                DNI = dni,
+                Nombre = nombre,
+                Apellido = apellido
+            });
         }
 
-        public void EditarSocio(Socio socio) { }
+        public void EditarSocio(string nombre, string apellido)
+        {
+
+        }
+
         public void DarBajaSocio(Socio socio) { }
         public void CrearProfesor(Profesor profesor) { }
         public void EditarProfesor(Profesor profesor) { }

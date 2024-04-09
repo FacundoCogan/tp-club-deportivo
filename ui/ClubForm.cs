@@ -20,7 +20,7 @@ namespace UI
 
             foreach (var socio in _club.Socios)
             {
-                var item = new ListViewItem(socio.ToString());
+                var item = new ListViewItem(new[] { socio.DNI, socio.Nombre, socio.Apellido });
 
                 sociosListView.Items.Add(item);
             }
@@ -28,13 +28,12 @@ namespace UI
 
         private void CrearSocio(object sender, EventArgs e)
         {
-            var nuevoSocioForm = new NuevoSocioForm();
+            var nuevoSocioForm = new NuevoSocioForm(_club);
 
             if (nuevoSocioForm.ShowDialog() != DialogResult.OK) return;
 
-            _club.CrearSocio(nuevoSocioForm.Socio);
-
             ActualizarSociosListView();
         }
+
     }
 }

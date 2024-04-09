@@ -1,36 +1,47 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Negocio;
 
 namespace UI
 {
     public partial class NuevoSocioForm : Form
     {
+        private readonly Club _club;
+
+        private string DNI => dniTextBox.Text;
+        private string Nombre => nombreTextBox.Text;
+        private string Apellido => apellidoTextBox.Text;
 
 
-        public Socio Socio { get; set; }
-
-        public NuevoSocioForm()
+        public NuevoSocioForm(Club club)
         {
             InitializeComponent();
             CenterToParent();
 
-
+            _club = club;
         }
 
         private void crearSocioButton_Click(object sender, System.EventArgs e)
         {
-            var socio = new Socio
+            if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
+                string.IsNullOrWhiteSpace(DNI))
             {
-                Nombre = nombreTextBox.Text,
-                Apellido = apellidoTextBox.Text,
-                DNI = dniTextBox.Text,
-            };
+                MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            Socio = socio;
+            try
+            {
+                _club.CrearSocio(DNI, Nombre, Apellido);
 
-            DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
 
-            Close();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
