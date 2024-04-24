@@ -53,6 +53,30 @@
     <Compile Include="ClubForm.Designer.cs">
       <DependentUpon>ClubForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ActivForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActivForm.Designer.cs">
+      <DependentUpon>ActivForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActAEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActAEditar.Designer.cs">
+      <DependentUpon>ActAEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeleccionarActAElim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeleccionarActAElim.Designer.cs">
+      <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeleccionarActForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeleccionarActForm.Designer.cs">
+      <DependentUpon>SeleccionarActForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuevoSocioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,8 +85,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ActAEditar.resx">
+      <DependentUpon>ActAEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeleccionarActAElim.resx">
+      <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeleccionarActForm.resx">
+      <DependentUpon>SeleccionarActForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClubForm.resx">
       <DependentUpon>ClubForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActivForm.resx">
+      <DependentUpon>ActivForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NuevoSocioForm.resx">
       <DependentUpon>NuevoSocioForm.cs</DependentUpon>

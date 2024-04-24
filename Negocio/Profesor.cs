@@ -8,7 +8,7 @@ namespace Negocio
         public List<Actividad> Actividades { get; set; }
 
 
-        public Profesor(string nombre, string apellido, string dni, string especialidad)
+        public Profesor(string nombre, string apellido, int dni, string especialidad)
             : base(nombre, apellido, dni)
         {
             Especialidad = especialidad;

@@ -5,7 +5,7 @@
         public decimal CuotaSocial { get; set; }
         public int MaxCantidadActividadesLibres { get; set; }
 
-        public SocioClub(string nombre, string apellido, string dni, decimal cuotaSocial, int maxActividadesLibres)
+        public SocioClub(string nombre, string apellido, int dni, decimal cuotaSocial, int maxActividadesLibres)
             : base(nombre, apellido, dni)
         {
             CuotaSocial = cuotaSocial;

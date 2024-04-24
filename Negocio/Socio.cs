@@ -7,11 +7,7 @@ namespace Negocio
         public List<Actividad> Actividades { get; set; }
         public List<OrdenPago> OrdenesPago { get; set; }
 
-        public Socio()
-        {
-        }
-
-        public Socio(string nombre, string apellido, string dni) : base(nombre, apellido, dni)
+        public Socio(string nombre, string apellido, int dni) : base(nombre, apellido, dni)
         {
             Actividades = new List<Actividad>();
             OrdenesPago = new List<OrdenPago>();

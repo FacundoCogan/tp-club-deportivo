@@ -8,7 +8,7 @@ namespace UI
     {
         private readonly Club _club;
 
-        private string DNI => dniTextBox.Text;
+        private int DNI => int.Parse(dniTextBox.Text);
         private string Nombre => nombreTextBox.Text;
         private string Apellido => apellidoTextBox.Text;
 
@@ -24,7 +24,7 @@ namespace UI
         private void crearSocioButton_Click(object sender, System.EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
-                string.IsNullOrWhiteSpace(DNI))
+                string.IsNullOrWhiteSpace(dniTextBox.Text))
             {
                 MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -32,7 +32,7 @@ namespace UI
 
             try
             {
-                _club.CrearSocio(DNI, Nombre, Apellido);
+                _club.CrearSocio(new Socio(Nombre, Apellido, DNI));
 
                 DialogResult = DialogResult.OK;
 
