@@ -35,43 +35,45 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cuotaSocialTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // nombreTextBox
             // 
-            this.nombreTextBox.Location = new System.Drawing.Point(65, 48);
+            this.nombreTextBox.Location = new System.Drawing.Point(84, 48);
             this.nombreTextBox.Name = "nombreTextBox";
             this.nombreTextBox.Size = new System.Drawing.Size(159, 20);
             this.nombreTextBox.TabIndex = 1;
             // 
             // apellidoTextBox
             // 
-            this.apellidoTextBox.Location = new System.Drawing.Point(65, 80);
+            this.apellidoTextBox.Location = new System.Drawing.Point(84, 80);
             this.apellidoTextBox.Name = "apellidoTextBox";
             this.apellidoTextBox.Size = new System.Drawing.Size(159, 20);
             this.apellidoTextBox.TabIndex = 2;
             // 
             // dniTextBox
             // 
-            this.dniTextBox.Location = new System.Drawing.Point(65, 16);
+            this.dniTextBox.Location = new System.Drawing.Point(84, 16);
             this.dniTextBox.Name = "dniTextBox";
             this.dniTextBox.Size = new System.Drawing.Size(159, 20);
             this.dniTextBox.TabIndex = 0;
             // 
             // crearSocioButton
             // 
-            this.crearSocioButton.Location = new System.Drawing.Point(149, 128);
+            this.crearSocioButton.Location = new System.Drawing.Point(168, 151);
             this.crearSocioButton.Name = "crearSocioButton";
             this.crearSocioButton.Size = new System.Drawing.Size(75, 23);
-            this.crearSocioButton.TabIndex = 3;
-            this.crearSocioButton.Text = "Crear";
+            this.crearSocioButton.TabIndex = 4;
+            this.crearSocioButton.Text = "Confirmar";
             this.crearSocioButton.UseVisualStyleBackColor = true;
             this.crearSocioButton.Click += new System.EventHandler(this.crearSocioButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(52, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 2;
@@ -80,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 51);
+            this.label2.Location = new System.Drawing.Point(34, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 3;
@@ -89,22 +91,40 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 83);
+            this.label3.Location = new System.Drawing.Point(34, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Apellido";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 119);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Cuota Social";
+            // 
+            // cuotaSocialTextBox
+            // 
+            this.cuotaSocialTextBox.Location = new System.Drawing.Point(84, 116);
+            this.cuotaSocialTextBox.Name = "cuotaSocialTextBox";
+            this.cuotaSocialTextBox.Size = new System.Drawing.Size(159, 20);
+            this.cuotaSocialTextBox.TabIndex = 3;
+            // 
             // NuevoSocioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(245, 163);
+            this.ClientSize = new System.Drawing.Size(272, 193);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.crearSocioButton);
             this.Controls.Add(this.dniTextBox);
+            this.Controls.Add(this.cuotaSocialTextBox);
             this.Controls.Add(this.apellidoTextBox);
             this.Controls.Add(this.nombreTextBox);
             this.Name = "NuevoSocioForm";
@@ -123,5 +143,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox cuotaSocialTextBox;
     }
 }

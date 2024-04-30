@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class SeleccionarActForm
+    partial class SeleccionarActividadForm
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@
             this.actComboBox.Size = new System.Drawing.Size(181, 21);
             this.actComboBox.TabIndex = 3;
             // 
-            // SeleccionarActForm
+            // SeleccionarActividadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -68,7 +68,7 @@
             this.Controls.Add(this.actComboBox);
             this.Controls.Add(this.buttEditAct);
             this.Controls.Add(this.label1);
-            this.Name = "SeleccionarActForm";
+            this.Name = "SeleccionarActividadForm";
             this.Text = "Seleccionar actividad";
             this.ResumeLayout(false);
             this.PerformLayout();

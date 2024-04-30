@@ -33,9 +33,36 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OleDb, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.OleDb.8.0.0\lib\net462\System.Data.OleDb.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,60 +74,73 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClubForm.cs">
+    <Compile Include="Forms\ClubForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClubForm.Designer.cs">
+    <Compile Include="Forms\ClubForm.Designer.cs">
       <DependentUpon>ClubForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActivForm.cs">
+    <Compile Include="Forms\ActivForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ActivForm.Designer.cs">
+    <Compile Include="Forms\ActivForm.Designer.cs">
       <DependentUpon>ActivForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActAEditar.cs">
+    <Compile Include="Forms\ActAEditar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ActAEditar.Designer.cs">
+    <Compile Include="Forms\ActAEditar.Designer.cs">
       <DependentUpon>ActAEditar.cs</DependentUpon>
     </Compile>
-    <Compile Include="SeleccionarActAElim.cs">
+    <Compile Include="Controls\FilterableDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Enums\FormMode.cs" />
+    <Compile Include="Forms\SeleccionarActAElim.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SeleccionarActAElim.Designer.cs">
+    <Compile Include="Forms\SeleccionarActAElim.Designer.cs">
       <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
     </Compile>
-    <Compile Include="SeleccionarActForm.cs">
+    <Compile Include="Forms\SeleccionarActividadForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SeleccionarActForm.Designer.cs">
-      <DependentUpon>SeleccionarActForm.cs</DependentUpon>
+    <Compile Include="Forms\SeleccionarActividadForm.Designer.cs">
+      <DependentUpon>SeleccionarActividadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NuevoSocioForm.cs">
+    <Compile Include="Forms\NuevoSocioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NuevoSocioForm.Designer.cs">
+    <Compile Include="Forms\NuevoSocioForm.Designer.cs">
       <DependentUpon>NuevoSocioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ActAEditar.resx">
+    <Compile Include="Forms\SociosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SociosForm.Designer.cs">
+      <DependentUpon>SociosForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\ActAEditar.resx">
       <DependentUpon>ActAEditar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SeleccionarActAElim.resx">
+    <EmbeddedResource Include="Controls\FilterableDataGridView.resx">
+      <DependentUpon>FilterableDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SeleccionarActAElim.resx">
       <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SeleccionarActForm.resx">
-      <DependentUpon>SeleccionarActForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\SeleccionarActividadForm.resx">
+      <DependentUpon>SeleccionarActividadForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClubForm.resx">
+    <EmbeddedResource Include="Forms\ClubForm.resx">
       <DependentUpon>ClubForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ActivForm.resx">
+    <EmbeddedResource Include="Forms\ActivForm.resx">
       <DependentUpon>ActivForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NuevoSocioForm.resx">
+    <EmbeddedResource Include="Forms\NuevoSocioForm.resx">
       <DependentUpon>NuevoSocioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -113,6 +153,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Forms\SociosForm.resx">
+      <DependentUpon>SociosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,6 +175,9 @@
       <Project>{5d025dcb-cc33-4579-91e3-a9c9205ddc6b}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Club.accdb" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

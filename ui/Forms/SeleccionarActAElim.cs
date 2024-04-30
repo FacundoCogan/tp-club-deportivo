@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Negocio;
+using Negocio.Modelos;
 
 namespace UI
 {
@@ -19,7 +19,7 @@ namespace UI
 
         public void mostrar(Actividad act)
         {
-            elimComboBox.Items.Add(act.Nombre);
+            //elimComboBox.Items.Add(act.Nombre);
         }
 
         private void buttConfirmElim_Click(object sender, EventArgs e)
@@ -31,12 +31,12 @@ namespace UI
             }
             else
             {
-                Actividad act = _club.BuscarActividad(elimComboBox.SelectedItem.ToString().ToLower());
-                int i = _club.BuscarIndice(act);
-                _club.EliminarActividad(i);
-                _cf.ActualizarActividadesListView();
-                DialogResult = DialogResult.OK;
-                this.Close();
+                //Actividad act = _club.BuscarActividad(elimComboBox.SelectedItem.ToString().ToLower());
+                //int i = _club.BuscarIndice(act);
+                //_club.EliminarActividad(i);
+                //_cf.ActualizarActividadesListView();
+                //DialogResult = DialogResult.OK;
+                //this.Close();
             }
         }
     }

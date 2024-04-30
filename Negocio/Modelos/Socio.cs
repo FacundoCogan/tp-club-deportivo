@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 
-namespace Negocio
+namespace Negocio.Modelos
 {
     public class Socio : Persona
     {
         public List<Actividad> Actividades { get; set; }
         public List<OrdenPago> OrdenesPago { get; set; }
 
-        public Socio(string nombre, string apellido, int dni) : base(nombre, apellido, dni)
+        public Socio()
+        {
+        }
+
+        public Socio(int dni, string nombre, string apellido) : base(dni, nombre, apellido)
         {
             Actividades = new List<Actividad>();
             OrdenesPago = new List<OrdenPago>();

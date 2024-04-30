@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
-using Negocio;
+using Negocio.Modelos;
 
 namespace UI
 {
@@ -35,7 +34,7 @@ namespace UI
 
             try
             {
-                _club.AgregarActividad(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo /*profesor*/));
+                //_club.AgregarActividad(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo /*profesor*/));
 
                 DialogResult = DialogResult.OK;
 

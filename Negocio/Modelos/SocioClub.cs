@@ -1,15 +1,15 @@
-﻿namespace Negocio
+﻿namespace Negocio.Modelos
 {
     public class SocioClub : Socio
     {
         public decimal CuotaSocial { get; set; }
         public int MaxCantidadActividadesLibres { get; set; }
 
-        public SocioClub(string nombre, string apellido, int dni, decimal cuotaSocial, int maxActividadesLibres)
-            : base(nombre, apellido, dni)
+        public SocioClub(int dni, string nombre, string apellido, decimal cuotaSocial)
+            : base(dni, nombre, apellido)
         {
             CuotaSocial = cuotaSocial;
-            MaxCantidadActividadesLibres = maxActividadesLibres;
+            //MaxCantidadActividadesLibres = maxActividadesLibres;
         }
 
         public override decimal CalcularMontoOrdenPago()

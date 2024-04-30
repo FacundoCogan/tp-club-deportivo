@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
-
-using Negocio;
+using Negocio.Modelos;
 
 namespace UI
 {
 
-    public partial class SeleccionarActForm : Form
+    public partial class SeleccionarActividadForm : Form
     {
         private readonly Club _club;
         private readonly ClubForm _cf;
-        public SeleccionarActForm(Club club, ClubForm cf)
+        public SeleccionarActividadForm(Club club, ClubForm cf)
         {
             InitializeComponent();
             CenterToScreen();
@@ -20,7 +19,7 @@ namespace UI
 
         public void mostrar(Actividad act)
         {
-            actComboBox.Items.Add(act.Nombre);
+            //actComboBox.Items.Add(act.Nombre);
         }
         private void buttEditAct_Click(object sender, EventArgs e)
         {
@@ -31,12 +30,12 @@ namespace UI
             }
             else
             {
-                Actividad act = _club.BuscarActividad(actComboBox.SelectedItem.ToString().ToLower());
-                int i = _club.BuscarIndice(act);
-                ActAEditar actAEditar = new ActAEditar(_club, i, _cf);
-                actAEditar.mostrarInfo(act);
-                actAEditar.ShowDialog();
-                this.Close();
+                //Actividad act = _club.BuscarActividad(actComboBox.SelectedItem.ToString().ToLower());
+                //int i = _club.BuscarIndice(act);
+                //ActAEditar actAEditar = new ActAEditar(_club, i, _cf);
+                //actAEditar.mostrarInfo(act);
+                //actAEditar.ShowDialog();
+                //this.Close();
             }
 
         }

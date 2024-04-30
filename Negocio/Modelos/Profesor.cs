@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Negocio
+namespace Negocio.Modelos
 {
     public class Profesor : Persona
     {
@@ -8,8 +8,8 @@ namespace Negocio
         public List<Actividad> Actividades { get; set; }
 
 
-        public Profesor(string nombre, string apellido, int dni, string especialidad)
-            : base(nombre, apellido, dni)
+        public Profesor(int dni, string nombre, string apellido, string especialidad)
+            : base(dni, nombre, apellido)
         {
             Especialidad = especialidad;
             Actividades = new List<Actividad>();
@@ -21,6 +21,4 @@ namespace Negocio
 
         }
     }
-
-
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Negocio
+namespace Negocio.Modelos
 {
     public class OrdenPago
     {

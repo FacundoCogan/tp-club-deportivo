@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
-using Negocio;
+using Negocio.Modelos;
 
 namespace UI
 {
@@ -24,11 +23,11 @@ namespace UI
 
         public void mostrarInfo(Actividad act)
         {
-            nombreTextBox.Text = act.Nombre.ToString();
-            descTextBox.Text   = act.Descripcion.ToString();
-            dyhTextBox.Text    = act.DiasHorarios.ToString();
-            costoTextBox.Text  = act.Costo.ToString();
-            cmTextBox.Text     = act.CupoMaximo.ToString();
+            //nombreTextBox.Text = act.Nombre.ToString();
+            //descTextBox.Text = act.Descripcion.ToString();
+            //dyhTextBox.Text = act.DiasHorarios.ToString();
+            //costoTextBox.Text = act.Costo.ToString();
+            //cmTextBox.Text = act.CupoMaximo.ToString();
             // profesorComboBox.SelectedItem = act.Profesor;
         }
 
@@ -43,11 +42,11 @@ namespace UI
             }
             else
             {
-                Actividad act = new Actividad(nombreTextBox.Text.ToLower(), descTextBox.Text, dyhTextBox.Text, double.Parse(costoTextBox.Text), int.Parse(cmTextBox.Text) /*profesorComboBox.SelectedItem*/);
-                _club.EditarActividad(act, _i);
-                _cf.ActualizarActividadesListView();
-                DialogResult = DialogResult.OK;
-                Close();
+                //Actividad act = new Actividad(nombreTextBox.Text.ToLower(), descTextBox.Text, dyhTextBox.Text, double.Parse(costoTextBox.Text), int.Parse(cmTextBox.Text) /*profesorComboBox.SelectedItem*/);
+                //_club.EditarActividad(act, _i);
+                //_cf.ActualizarActividadesListView();
+                //DialogResult = DialogResult.OK;
+                //Close();
             }
         }
     }

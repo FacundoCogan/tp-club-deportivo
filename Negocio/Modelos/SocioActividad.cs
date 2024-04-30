@@ -1,8 +1,8 @@
-﻿namespace Negocio
+﻿namespace Negocio.Modelos
 {
     public class SocioActividad : Socio
     {
-        public SocioActividad(string nombre, string apellido, int dni) : base(nombre, apellido, dni) { }
+        public SocioActividad(int dni, string nombre, string apellido) : base(dni, nombre, apellido) { }
 
         public override decimal CalcularMontoOrdenPago()
         {
