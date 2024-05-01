@@ -1,5 +1,4 @@
-﻿
-using System.Data;
+﻿using System.Data;
 using System.Data.OleDb;
 
 namespace Datos
@@ -17,16 +16,17 @@ namespace Datos
 
         public DataTable GetAllActividadesDetallado()
         {
-            const string query = "SELECT A.*, p.DNI as ProfesorDNI, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, p.Especialidad " +
-                                 "FROM Actividades A " +
-                                 "INNER JOIN Profesores P ON A.ProfesorDNI = P.DNI " +
-                                 "WHERE A.Activo = ?";
+            const string query =
+                "SELECT A.*, p.DNI as ProfesorDNI, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, p.Especialidad " +
+                "FROM Actividades A " +
+                "INNER JOIN Profesores P ON A.ProfesorDNI = P.DNI " +
+                "WHERE A.Activo = ?";
 
             return ExecuteQuery(query, new OleDbParameter("Activo", true));
         }
 
-
-        public bool Insert(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo, int profesorDNI)
+        public bool Insert(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
+            int profesorDNI)
         {
             OleDbParameter[] parameters =
             {

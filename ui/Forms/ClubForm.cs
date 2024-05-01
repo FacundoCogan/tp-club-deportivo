@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using Negocio.Modelos;
+using UI.Forms;
+using UI.Forms.Actividades;
 
 namespace UI
 {
@@ -36,7 +38,7 @@ namespace UI
 
         private void CrearActividad_Click(object sender, EventArgs e)
         {
-            var actividadForm = new ActivForm(_club);
+            var actividadForm = new ActividadForm(_club);
 
             if (actividadForm.ShowDialog() != DialogResult.OK) return;
 
@@ -78,7 +80,28 @@ namespace UI
         {
             var nuevoSocioForm = new SociosForm(_club);
 
-            if (nuevoSocioForm.ShowDialog() != DialogResult.OK) return;
+            nuevoSocioForm.ShowDialog();
+        }
+
+        private void verProfesoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var profesoresForm = new ProfesoresForm(_club);
+
+            profesoresForm.ShowDialog();
+        }
+
+        private void nuevoProfesorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var profesorForm = new ProfesorForm(_club);
+
+            profesorForm.ShowDialog();
+        }
+
+        private void verActividadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var actividadesForm = new ActividadesForm(_club);
+
+            actividadesForm.ShowDialog();
         }
     }
 }

@@ -35,11 +35,13 @@ namespace UI
             this.sociosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verSociosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.darDeBajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actividadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CrearActividad = new System.Windows.Forms.ToolStripMenuItem();
             this.profesoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verProfesoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoProfesorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clubBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.verActividadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clubBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -60,8 +62,7 @@ namespace UI
             // 
             this.sociosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verSociosToolStripMenuItem,
-            this.nuevoToolStripMenuItem,
-            this.darDeBajaToolStripMenuItem});
+            this.nuevoToolStripMenuItem});
             this.sociosToolStripMenuItem.Name = "sociosToolStripMenuItem";
             this.sociosToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.sociosToolStripMenuItem.Text = "Socios";
@@ -69,26 +70,21 @@ namespace UI
             // verSociosToolStripMenuItem
             // 
             this.verSociosToolStripMenuItem.Name = "verSociosToolStripMenuItem";
-            this.verSociosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.verSociosToolStripMenuItem.Text = "Ver Socios";
+            this.verSociosToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.verSociosToolStripMenuItem.Text = "Ver listado";
             this.verSociosToolStripMenuItem.Click += new System.EventHandler(this.verSociosToolStripMenuItem_Click);
             // 
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.CrearSocio);
-            // 
-            // darDeBajaToolStripMenuItem
-            // 
-            this.darDeBajaToolStripMenuItem.Name = "darDeBajaToolStripMenuItem";
-            this.darDeBajaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.darDeBajaToolStripMenuItem.Text = "Dar de baja";
             // 
             // actividadesToolStripMenuItem
             // 
             this.actividadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verActividadesToolStripMenuItem,
             this.CrearActividad});
             this.actividadesToolStripMenuItem.Name = "actividadesToolStripMenuItem";
             this.actividadesToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
@@ -97,15 +93,39 @@ namespace UI
             // CrearActividad
             // 
             this.CrearActividad.Name = "CrearActividad";
-            this.CrearActividad.Size = new System.Drawing.Size(108, 22);
+            this.CrearActividad.Size = new System.Drawing.Size(180, 22);
             this.CrearActividad.Text = "Nueva";
             this.CrearActividad.Click += new System.EventHandler(this.CrearActividad_Click);
             // 
             // profesoresToolStripMenuItem
             // 
+            this.profesoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verProfesoresToolStripMenuItem,
+            this.nuevoProfesorToolStripMenuItem1});
             this.profesoresToolStripMenuItem.Name = "profesoresToolStripMenuItem";
             this.profesoresToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.profesoresToolStripMenuItem.Text = "Profesores";
+            // 
+            // verProfesoresToolStripMenuItem
+            // 
+            this.verProfesoresToolStripMenuItem.Name = "verProfesoresToolStripMenuItem";
+            this.verProfesoresToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.verProfesoresToolStripMenuItem.Text = "Ver listado";
+            this.verProfesoresToolStripMenuItem.Click += new System.EventHandler(this.verProfesoresToolStripMenuItem_Click);
+            // 
+            // nuevoProfesorToolStripMenuItem1
+            // 
+            this.nuevoProfesorToolStripMenuItem1.Name = "nuevoProfesorToolStripMenuItem1";
+            this.nuevoProfesorToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
+            this.nuevoProfesorToolStripMenuItem1.Text = "Nuevo";
+            this.nuevoProfesorToolStripMenuItem1.Click += new System.EventHandler(this.nuevoProfesorToolStripMenuItem1_Click);
+            // 
+            // verActividadesToolStripMenuItem
+            // 
+            this.verActividadesToolStripMenuItem.Name = "verActividadesToolStripMenuItem";
+            this.verActividadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verActividadesToolStripMenuItem.Text = "Ver listado";
+            this.verActividadesToolStripMenuItem.Click += new System.EventHandler(this.verActividadesToolStripMenuItem_Click);
             // 
             // ClubForm
             // 
@@ -129,12 +149,14 @@ namespace UI
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sociosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem darDeBajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actividadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profesoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CrearActividad;
         private System.Windows.Forms.BindingSource clubBindingSource;
         private System.Windows.Forms.ToolStripMenuItem verSociosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nuevoProfesorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem verProfesoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verActividadesToolStripMenuItem;
     }
 }
 

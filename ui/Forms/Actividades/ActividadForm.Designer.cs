@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class ActivForm
+    public partial class ActividadForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,11 +36,12 @@
             this.descripcionTextBox = new System.Windows.Forms.TextBox();
             this.diasHorariosTextBox = new System.Windows.Forms.TextBox();
             this.costoTextBox = new System.Windows.Forms.TextBox();
-            this.cupoMaximoTextBox = new System.Windows.Forms.TextBox();
             this.buttCrearAct = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.nombreTextBox = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.profesorComboBox = new System.Windows.Forms.ComboBox();
+            this.cupoMaximoNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.cupoMaximoNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -109,13 +110,6 @@
             this.costoTextBox.Size = new System.Drawing.Size(100, 20);
             this.costoTextBox.TabIndex = 3;
             // 
-            // cupoMaximoTextBox
-            // 
-            this.cupoMaximoTextBox.Location = new System.Drawing.Point(177, 286);
-            this.cupoMaximoTextBox.Name = "cupoMaximoTextBox";
-            this.cupoMaximoTextBox.Size = new System.Drawing.Size(100, 20);
-            this.cupoMaximoTextBox.TabIndex = 4;
-            // 
             // buttCrearAct
             // 
             this.buttCrearAct.Location = new System.Drawing.Point(296, 404);
@@ -142,24 +136,31 @@
             this.nombreTextBox.Size = new System.Drawing.Size(100, 20);
             this.nombreTextBox.TabIndex = 0;
             // 
-            // comboBox1
+            // profesorComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(177, 340);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 12;
+            this.profesorComboBox.FormattingEnabled = true;
+            this.profesorComboBox.Location = new System.Drawing.Point(177, 340);
+            this.profesorComboBox.Name = "profesorComboBox";
+            this.profesorComboBox.Size = new System.Drawing.Size(100, 21);
+            this.profesorComboBox.TabIndex = 12;
             // 
-            // ActivForm
+            // cupoMaximoNumericUpDown
+            // 
+            this.cupoMaximoNumericUpDown.Location = new System.Drawing.Point(177, 287);
+            this.cupoMaximoNumericUpDown.Name = "cupoMaximoNumericUpDown";
+            this.cupoMaximoNumericUpDown.Size = new System.Drawing.Size(100, 20);
+            this.cupoMaximoNumericUpDown.TabIndex = 13;
+            // 
+            // ActividadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 450);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cupoMaximoNumericUpDown);
+            this.Controls.Add(this.profesorComboBox);
             this.Controls.Add(this.nombreTextBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.buttCrearAct);
-            this.Controls.Add(this.cupoMaximoTextBox);
             this.Controls.Add(this.costoTextBox);
             this.Controls.Add(this.diasHorariosTextBox);
             this.Controls.Add(this.descripcionTextBox);
@@ -168,8 +169,9 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Name = "ActivForm";
+            this.Name = "ActividadForm";
             this.Text = "Nueva Actividad";
+            ((System.ComponentModel.ISupportInitialize)(this.cupoMaximoNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,10 +187,10 @@
         private System.Windows.Forms.TextBox descripcionTextBox;
         private System.Windows.Forms.TextBox diasHorariosTextBox;
         private System.Windows.Forms.TextBox costoTextBox;
-        private System.Windows.Forms.TextBox cupoMaximoTextBox;
         private System.Windows.Forms.Button buttCrearAct;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox nombreTextBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox profesorComboBox;
+        private System.Windows.Forms.NumericUpDown cupoMaximoNumericUpDown;
     }
 }

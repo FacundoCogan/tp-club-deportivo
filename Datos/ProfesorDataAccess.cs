@@ -1,5 +1,5 @@
-﻿
-using System.Data;
+﻿using System.Data;
+using System.Data.OleDb;
 
 namespace Datos
 {
@@ -14,8 +14,14 @@ namespace Datos
             return GetAll();
         }
 
+        public bool Insert(int dni, string nombre, string apellido, string especialidad)
+        {
+            return Insert(dni, nombre, apellido, new OleDbParameter("Especialidad", especialidad));
+        }
 
-
-
+        public bool Update(int dni, string nombre, string apellido, string especialidad)
+        {
+            return Update(dni, nombre, apellido, new OleDbParameter("Especialidad", especialidad));
+        }
     }
 }

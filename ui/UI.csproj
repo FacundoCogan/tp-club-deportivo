@@ -74,28 +74,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Actividades\ActividadesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Actividades\ActividadesForm.Designer.cs">
+      <DependentUpon>ActividadesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ClubForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ClubForm.Designer.cs">
       <DependentUpon>ClubForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ActivForm.cs">
+    <Compile Include="Forms\Actividades\ActividadForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ActivForm.Designer.cs">
-      <DependentUpon>ActivForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ActAEditar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ActAEditar.Designer.cs">
-      <DependentUpon>ActAEditar.cs</DependentUpon>
+    <Compile Include="Forms\Actividades\ActividadForm.Designer.cs">
+      <DependentUpon>ActividadForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\FilterableDataGridView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Enums\FormMode.cs" />
+    <Compile Include="Forms\ProfesorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProfesorForm.Designer.cs">
+      <DependentUpon>ProfesorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProfesoresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProfesoresForm.Designer.cs">
+      <DependentUpon>ProfesoresForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SeleccionarActAElim.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,25 +120,31 @@
     <Compile Include="Forms\SeleccionarActividadForm.Designer.cs">
       <DependentUpon>SeleccionarActividadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NuevoSocioForm.cs">
+    <Compile Include="Forms\Socios\NuevoSocioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\NuevoSocioForm.Designer.cs">
+    <Compile Include="Forms\Socios\NuevoSocioForm.Designer.cs">
       <DependentUpon>NuevoSocioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\SociosForm.cs">
+    <Compile Include="Forms\Socios\SociosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SociosForm.Designer.cs">
+    <Compile Include="Forms\Socios\SociosForm.Designer.cs">
       <DependentUpon>SociosForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\ActAEditar.resx">
-      <DependentUpon>ActAEditar.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\FilterableDataGridView.resx">
       <DependentUpon>FilterableDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Actividades\ActividadesForm.resx">
+      <DependentUpon>ActividadesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfesorForm.resx">
+      <DependentUpon>ProfesorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfesoresForm.resx">
+      <DependentUpon>ProfesoresForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SeleccionarActAElim.resx">
       <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
@@ -137,10 +155,10 @@
     <EmbeddedResource Include="Forms\ClubForm.resx">
       <DependentUpon>ClubForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ActivForm.resx">
-      <DependentUpon>ActivForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Actividades\ActividadForm.resx">
+      <DependentUpon>ActividadForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NuevoSocioForm.resx">
+    <EmbeddedResource Include="Forms\Socios\NuevoSocioForm.resx">
       <DependentUpon>NuevoSocioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -153,7 +171,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\SociosForm.resx">
+    <EmbeddedResource Include="Forms\Socios\SociosForm.resx">
       <DependentUpon>SociosForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

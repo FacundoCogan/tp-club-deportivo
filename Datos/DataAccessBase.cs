@@ -28,8 +28,12 @@ namespace Datos
             var command = new OleDbCommand(query, connection);
 
             if (parameters != null)
+            {
                 foreach (var parameter in parameters)
+                {
                     command.Parameters.Add(parameter);
+                }
+            }
 
             return command;
         }

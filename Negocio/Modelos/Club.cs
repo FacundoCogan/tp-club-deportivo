@@ -7,7 +7,6 @@ namespace Negocio.Modelos
     {
         private readonly ActividadBusiness _actividades = new ActividadBusiness();
         private readonly ProfesorBusiness _profesores = new ProfesorBusiness();
-
         private readonly SocioBusiness _socios = new SocioBusiness();
 
 
@@ -20,9 +19,12 @@ namespace Negocio.Modelos
         public List<Actividad> ActividadesDetallado => _actividades.GetAllActividadesDetallado();
 
 
-        public void AgregarActividad(Actividad actividad)
+        public void AgregarActividad(string nombre, string descripcion, string diasHorarios, decimal costo,
+            int cupoMaximo, int profesorDNI)
         {
+            _actividades.Agregar(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorDNI);
         }
+
 
         public void EditarActividad(Actividad actividad)
         {
@@ -47,16 +49,19 @@ namespace Negocio.Modelos
             return _socios.Eliminar(dniSocio);
         }
 
-        public void CrearProfesor(Profesor profesor)
+        public bool CrearProfesor(int dni, string nombre, string apellido, string especialidad)
         {
+            return _profesores.Agregar(new Profesor(dni, nombre, apellido, especialidad));
         }
 
-        public void EditarProfesor(Profesor profesor)
+        public bool EditarProfesor(int dni, string nombre, string apellido, string especialidad)
         {
+            return _profesores.Editar(new Profesor(dni, nombre, apellido, especialidad));
         }
 
-        public void DarBajaProfesor(Profesor profesor)
+        public void DarBajaProfesor(int dniProfesor)
         {
+            _profesores.Eliminar(dniProfesor);
         }
 
         public void ConsultarActividades()

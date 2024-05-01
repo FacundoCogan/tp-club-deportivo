@@ -4,14 +4,6 @@ namespace Negocio.Modelos
 {
     public class Actividad
     {
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string DiasHorarios { get; set; }
-        public decimal Costo { get; set; }
-        public int CupoMaximo { get; set; }
-        public Profesor Profesor { get; set; }
-        public List<Socio> Participantes { get; set; } = new List<Socio>();
-
         public Actividad(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo)
         {
             Nombre = nombre;
@@ -27,10 +19,30 @@ namespace Negocio.Modelos
             Profesor = profesor;
         }
 
-        public bool ConsultarDisponibilidad() { return false; }
-        public void InscribirParticipante(Socio socio) { }
-        public void DarBajaParticipante(Socio socio) { }
-        public void VerParticipantes() { }
-    }
+        public int ID { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string DiasHorarios { get; set; }
+        public decimal Costo { get; set; }
+        public int CupoMaximo { get; set; }
+        public Profesor Profesor { get; set; }
+        public List<Socio> Participantes { get; set; } = new List<Socio>();
 
+        public bool ConsultarDisponibilidad()
+        {
+            return false;
+        }
+
+        public void InscribirParticipante(Socio socio)
+        {
+        }
+
+        public void DarBajaParticipante(Socio socio)
+        {
+        }
+
+        public void VerParticipantes()
+        {
+        }
+    }
 }
