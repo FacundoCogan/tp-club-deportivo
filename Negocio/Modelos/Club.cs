@@ -26,12 +26,15 @@ namespace Negocio.Modelos
         }
 
 
-        public void EditarActividad(Actividad actividad)
+        public void EditarActividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
+            int cupoMaximo, int profesorDNI)
         {
+            _actividades.Editar(new Actividad(id, nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorDNI);
         }
 
-        public void EliminarActividad(Actividad actividad)
+        public void EliminarActividad(int ID)
         {
+            _actividades.Eliminar(ID);
         }
 
         public void CrearSocio(int dni, string nombre, string apellido, decimal cuotaSocial)

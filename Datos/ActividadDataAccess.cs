@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.Data.OleDb;
+using System.Linq;
+using System.Net;
 
 namespace Datos
 {
@@ -39,6 +41,34 @@ namespace Datos
             };
 
             return Insert(parameters);
+        }
+
+        public bool Update(int ID, string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
+                       int profesorDNI)
+        {
+            OleDbParameter[] baseParameters =
+            {
+                new OleDbParameter("Nombre", nombre),
+                new OleDbParameter("Descripcion", descripcion),
+                new OleDbParameter("DiasHorarios", diasHorarios),
+                new OleDbParameter("Costo", costo),
+                new OleDbParameter("CupoMaximo", cupoMaximo),
+                new OleDbParameter("ProfesorDNI", profesorDNI),
+            };
+
+            var whereParameter = new OleDbParameter("ID", ID);
+
+            return Update(baseParameters, "ID = ?", whereParameter);
+        }
+
+        public bool Delete(int ID)
+        {
+            OleDbParameter[] parameters =
+            {
+                new OleDbParameter("ID", ID)
+            };
+
+            return Delete("ID = ?", parameters);
         }
     }
 }

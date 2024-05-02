@@ -60,19 +60,22 @@ namespace UI.Forms.Actividades
 
         private void OnEditClicked(int rowIndex, DataGridViewRow rowData)
         {
-            //var socio = new SocioClub(
-            //    (int)rowData.Cells["DNI"].Value,
-            //    (string)rowData.Cells["Nombre"].Value,
-            //    (string)rowData.Cells["Apellido"].Value,
-            //    (decimal)rowData.Cells["Cuota Social"].Value);
+            var actividad = new Actividad(
+                (int)rowData.Cells["ID"].Value,
+                (string)rowData.Cells["Nombre"].Value,
+                (string)rowData.Cells["Descripción"].Value,
+                (string)rowData.Cells["Dias y Horarios"].Value,
+                (decimal)rowData.Cells["Costo"].Value,
+                (int)rowData.Cells["Cupo Máximo"].Value);
+                
 
-            //var editSocioForm = new NuevoSocioForm(_club, socio);
+            var editSocioForm = new ActividadForm(_club, actividad);
 
-            //editSocioForm.ShowDialog();
+            editSocioForm.ShowDialog();
 
-            //if (editSocioForm.DialogResult != DialogResult.OK) return;
+            if (editSocioForm.DialogResult != DialogResult.OK) return;
 
-            //LoadActividadesData();
+            LoadActividadesData();
         }
 
         private void OnDeleteClicked(int rowIndex, DataGridViewRow rowData)
@@ -80,9 +83,9 @@ namespace UI.Forms.Actividades
             if (MessageBox.Show("¿Está seguro que desea eliminar esta actividad?", "Eliminar actividad",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            //_club.DarBajaSocio((int)rowData.Cells["DNI"].Value);
+            _club.EliminarActividad((int)rowData.Cells["ID"].Value);
 
-            //LoadActividadesData();
+            LoadActividadesData();
         }
     }
 }
