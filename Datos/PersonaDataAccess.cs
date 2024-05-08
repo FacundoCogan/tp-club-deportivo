@@ -10,34 +10,23 @@ namespace Datos
         {
         }
 
-        public DataRow GetByDNI(int dni)
-        {
-            OleDbParameter[] parameters =
-            {
-                new OleDbParameter("DNI", dni)
-            };
-
-            var dt = GetBy("DNI = ? AND Activo = TRUE", parameters);
-
-            return dt.Rows.Count == 0 ? null : dt.Rows[0];
-        }
-
         protected DataTable GetAll()
         {
             return GetAll("Activo = TRUE");
         }
 
-        public bool Delete(int dni)
+        public bool Delete(int id)
         {
             OleDbParameter[] parameters =
             {
-                new OleDbParameter("DNI", dni)
+                new OleDbParameter("ID", id)
             };
 
-            return Delete("DNI = ?", parameters);
+            return Delete("ID = ?", parameters);
         }
 
-        public bool Insert(int dni, string nombre, string apellido, params OleDbParameter[] additionalParameters)
+        public bool Insert(int dni, string nombre, string apellido,
+            params OleDbParameter[] additionalParameters)
         {
             OleDbParameter[] baseParameters =
             {
@@ -51,7 +40,8 @@ namespace Datos
             return Insert(combinedParameters);
         }
 
-        public bool Update(int dni, string nombre, string apellido, params OleDbParameter[] additionalParameters)
+        public bool Update(int id, int dni, string nombre, string apellido,
+            params OleDbParameter[] additionalParameters)
         {
             OleDbParameter[] baseParameters =
             {
@@ -60,12 +50,20 @@ namespace Datos
                 new OleDbParameter("Apellido", apellido)
             };
 
-            var whereParameter = new OleDbParameter("WhereDNI", dni);
-
             var combinedParameters =
                 baseParameters.Concat(additionalParameters).ToArray();
 
-            return Update(combinedParameters, "DNI = ?", whereParameter);
+            return Update(combinedParameters, "ID = ?", new OleDbParameter("ID", id));
+        }
+
+        public bool Exists(int dni)
+        {
+            OleDbParameter[] parameters =
+            {
+                new OleDbParameter("DNI", dni)
+            };
+
+            return Exists(parameters);
         }
     }
 }

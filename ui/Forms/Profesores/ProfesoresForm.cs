@@ -37,14 +37,15 @@ namespace UI.Forms
         {
             var dt = new DataTable();
 
+            dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("DNI", typeof(int));
             dt.Columns.Add("Nombre", typeof(string));
             dt.Columns.Add("Apellido", typeof(string));
             dt.Columns.Add("Especialidad", typeof(string));
 
-            foreach (var socio in _club.Profesores)
+            foreach (var profesor in _club.Profesores)
             {
-                dt.Rows.Add(socio.DNI, socio.Nombre, socio.Apellido, socio.Especialidad);
+                dt.Rows.Add(profesor.ID, profesor.DNI, profesor.Nombre, profesor.Apellido, profesor.Especialidad);
             }
 
             _filterableDataGridView.DataSource = dt;
@@ -53,6 +54,7 @@ namespace UI.Forms
         private void OnEditClicked(int rowIndex, DataGridViewRow rowData)
         {
             var profesor = new Profesor(
+                (int)rowData.Cells["ID"].Value,
                 (int)rowData.Cells["DNI"].Value,
                 (string)rowData.Cells["Nombre"].Value,
                 (string)rowData.Cells["Apellido"].Value,
@@ -72,7 +74,7 @@ namespace UI.Forms
             if (MessageBox.Show("¿Está seguro que desea eliminar este profesor?", "Eliminar profesor",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            _club.DarBajaProfesor((int)rowData.Cells["DNI"].Value);
+            _club.DarBajaProfesor((int)rowData.Cells["ID"].Value);
 
             LoadProfesoresData();
         }

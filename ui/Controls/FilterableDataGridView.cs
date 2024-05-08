@@ -7,9 +7,7 @@ namespace UI.Controls
 {
     public class FilterableDataGridView : UserControl
     {
-        public delegate void DeleteActionHandler(int rowIndex, DataGridViewRow rowData);
-
-        public delegate void EditActionHandler(int rowIndex, DataGridViewRow rowData);
+        public delegate void ActionHandler(int rowIndex, DataGridViewRow rowData);
 
         private BindingSource _bindingSource;
         private DataGridView _dataGridView;
@@ -33,8 +31,8 @@ namespace UI.Controls
 
         public DataGridViewColumnCollection Columns => _dataGridView.Columns;
 
-        public event EditActionHandler EditClicked;
-        public event DeleteActionHandler DeleteClicked;
+        public event ActionHandler EditClicked;
+        public event ActionHandler DeleteClicked;
 
         private void InitializeComponents()
         {

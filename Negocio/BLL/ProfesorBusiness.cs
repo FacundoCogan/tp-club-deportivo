@@ -17,17 +17,8 @@ namespace Negocio.BLL
 
         public bool Editar(Profesor profesor)
         {
-            return _profesorDataAccess.Update(profesor.DNI, profesor.Nombre, profesor.Apellido, profesor.Especialidad);
-        }
-
-
-        public Profesor GetByDNI(int dni)
-        {
-            var profesorDataRow = _profesorDataAccess.GetByDNI(dni);
-
-            return new Profesor(profesorDataRow.Field<int>("DNI"), profesorDataRow.Field<string>("Nombre"),
-                profesorDataRow.Field<string>("Apellido"), profesorDataRow.Field<string>("Especialidad"));
-            ;
+            return _profesorDataAccess.Update(profesor.ID, profesor.DNI, profesor.Nombre, profesor.Apellido,
+                profesor.Especialidad);
         }
 
         public List<Profesor> GetAllProfesores()
@@ -35,7 +26,7 @@ namespace Negocio.BLL
             var dataTable = _profesorDataAccess.GetAllProfesores();
 
             return (from DataRow row in dataTable.Rows
-                    select new Profesor(row.Field<int>("DNI"), row.Field<string>("Nombre"),
+                    select new Profesor(row.Field<int>("ID"), row.Field<int>("DNI"), row.Field<string>("Nombre"),
                         row.Field<string>("Apellido"), row.Field<string>("Especialidad"))).ToList();
         }
 
@@ -46,9 +37,9 @@ namespace Negocio.BLL
         //    return (from DataRow row in dataTable.Rows select new Profesor(row.Field<int>("DNI"), row.Field<string>("Nombre"), row.Field<string>("Apellido"), row.Field<string>("Especialidad"), row.Field<string>("Actividades"))).ToList();
         //}
 
-        public bool Eliminar(int dni)
+        public bool Eliminar(int id)
         {
-            return _profesorDataAccess.Delete(dni);
+            return _profesorDataAccess.Delete(id);
         }
     }
 }

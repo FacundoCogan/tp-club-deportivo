@@ -2,13 +2,14 @@
 {
     public class SocioActividad : Socio
     {
-        public SocioActividad(int dni, string nombre, string apellido) : base(dni, nombre, apellido) { }
+        public SocioActividad(int id, int dni, string nombre, string apellido, decimal? cuotaSocial) : base(id, dni,
+            nombre, apellido, cuotaSocial)
+        {
+        }
 
         public override decimal CalcularMontoOrdenPago()
         {
-            // Custom implementation for SocioActividad
-            return base.CalcularMontoOrdenPago(); // Replace with custom logic
+            return base.CalcularMontoOrdenPago();
         }
     }
-
 }

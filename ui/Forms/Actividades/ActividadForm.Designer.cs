@@ -1,4 +1,4 @@
-﻿namespace UI
+﻿namespace UI.Forms
 {
     public partial class ActividadForm
     {
@@ -36,7 +36,7 @@
             this.descripcionTextBox = new System.Windows.Forms.TextBox();
             this.diasHorariosTextBox = new System.Windows.Forms.TextBox();
             this.costoTextBox = new System.Windows.Forms.TextBox();
-            this.buttCrearAct = new System.Windows.Forms.Button();
+            this.confirmarButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.nombreTextBox = new System.Windows.Forms.TextBox();
             this.profesorComboBox = new System.Windows.Forms.ComboBox();
@@ -110,15 +110,15 @@
             this.costoTextBox.Size = new System.Drawing.Size(100, 20);
             this.costoTextBox.TabIndex = 3;
             // 
-            // buttCrearAct
+            // confirmarButton
             // 
-            this.buttCrearAct.Location = new System.Drawing.Point(296, 404);
-            this.buttCrearAct.Name = "buttCrearAct";
-            this.buttCrearAct.Size = new System.Drawing.Size(75, 23);
-            this.buttCrearAct.TabIndex = 10;
-            this.buttCrearAct.Text = "Crear";
-            this.buttCrearAct.UseVisualStyleBackColor = true;
-            this.buttCrearAct.Click += new System.EventHandler(this.buttCrearAct_Click);
+            this.confirmarButton.Location = new System.Drawing.Point(296, 404);
+            this.confirmarButton.Name = "confirmarButton";
+            this.confirmarButton.Size = new System.Drawing.Size(75, 23);
+            this.confirmarButton.TabIndex = 10;
+            this.confirmarButton.Text = "Confirmar";
+            this.confirmarButton.UseVisualStyleBackColor = true;
+            this.confirmarButton.Click += new System.EventHandler(this.buttCrearAct_Click);
             // 
             // label7
             // 
@@ -160,7 +160,7 @@
             this.Controls.Add(this.profesorComboBox);
             this.Controls.Add(this.nombreTextBox);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.buttCrearAct);
+            this.Controls.Add(this.confirmarButton);
             this.Controls.Add(this.costoTextBox);
             this.Controls.Add(this.diasHorariosTextBox);
             this.Controls.Add(this.descripcionTextBox);
@@ -187,7 +187,7 @@
         private System.Windows.Forms.TextBox descripcionTextBox;
         private System.Windows.Forms.TextBox diasHorariosTextBox;
         private System.Windows.Forms.TextBox costoTextBox;
-        private System.Windows.Forms.Button buttCrearAct;
+        private System.Windows.Forms.Button confirmarButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox nombreTextBox;
         private System.Windows.Forms.ComboBox profesorComboBox;

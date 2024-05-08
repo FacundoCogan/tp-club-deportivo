@@ -10,28 +10,41 @@ namespace Negocio.BLL
     {
         private readonly SocioDataAccess _socioDataAccess = new SocioDataAccess();
 
-        public bool Agregar(SocioClub socio)
+        public bool Agregar(Socio socio)
         {
             return _socioDataAccess.Insert(socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
         }
 
-        public List<SocioClub> GetAllSocios()
+        public List<Socio> GetAllSocios()
         {
             var dataTable = _socioDataAccess.GetAllSocios();
 
+
             return (from DataRow row in dataTable.Rows
-                    select new SocioClub(row.Field<int>("DNI"), row.Field<string>("Nombre"),
-                        row.Field<string>("Apellido"), row.Field<decimal>("CuotaSocial"))).ToList();
+                    select row.Field<decimal?>("CuotaSocial") != null
+                        ? new SocioClub(
+                            row.Field<int>("ID"),
+                            row.Field<int>("DNI"),
+                            row.Field<string>("Nombre"),
+                            row.Field<string>("Apellido"),
+                            row.Field<decimal>("CuotaSocial"))
+                        : (Socio)new SocioActividad(
+                            row.Field<int>("ID"),
+                            row.Field<int>("DNI"),
+                            row.Field<string>("Nombre"),
+                            row.Field<string>("Apellido"),
+                            row.Field<decimal>("CuotaSocial")
+                        )).ToList();
         }
 
-        public bool Editar(SocioClub socio)
+        public bool Editar(Socio socio)
         {
-            return _socioDataAccess.Update(socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
+            return _socioDataAccess.Update(socio.ID, socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
         }
 
-        public bool Eliminar(int dni)
+        public bool Eliminar(int id)
         {
-            return _socioDataAccess.Delete(dni);
+            return _socioDataAccess.Delete(id);
         }
     }
 }

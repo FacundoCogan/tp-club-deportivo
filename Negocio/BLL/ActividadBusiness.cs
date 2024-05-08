@@ -10,16 +10,17 @@ namespace Negocio.BLL
     {
         private readonly ActividadDataAccess _actividaDataAccess = new ActividadDataAccess();
 
-        public bool Agregar(Actividad actividad, int profesorDNI)
+        public bool Agregar(Actividad actividad, int profesorID)
         {
             return _actividaDataAccess.Insert(actividad.Nombre, actividad.Descripcion, actividad.DiasHorarios,
-                actividad.Costo, actividad.CupoMaximo, profesorDNI);
+                actividad.Costo, actividad.CupoMaximo, profesorID);
         }
 
-        public bool Editar(Actividad actividad, int profesorDNI)
+        public bool Editar(Actividad actividad, int profesorID)
         {
-            return _actividaDataAccess.Update(actividad.ID, actividad.Nombre, actividad.Descripcion, actividad.DiasHorarios,
-                               actividad.Costo, actividad.CupoMaximo, profesorDNI);
+            return _actividaDataAccess.Update(actividad.ID, actividad.Nombre, actividad.Descripcion,
+                actividad.DiasHorarios,
+                actividad.Costo, actividad.CupoMaximo, profesorID);
         }
 
         public bool Eliminar(int ID)
@@ -32,7 +33,8 @@ namespace Negocio.BLL
             var dataTable = _actividaDataAccess.GetAllActividades();
 
             return (from DataRow row in dataTable.Rows
-                    select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"), row.Field<string>("Descripcion"),
+                    select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"),
+                        row.Field<string>("Descripcion"),
                         row.Field<string>("DiasHorarios"), row.Field<decimal>("Costo"), row.Field<int>("CupoMaximo")))
                 .ToList();
         }
@@ -42,9 +44,11 @@ namespace Negocio.BLL
             var dataTable = _actividaDataAccess.GetAllActividadesDetallado();
 
             return (from DataRow row in dataTable.Rows
-                    select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"), row.Field<string>("Descripcion"),
+                    select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"),
+                        row.Field<string>("Descripcion"),
                         row.Field<string>("DiasHorarios"), row.Field<decimal>("Costo"), row.Field<int>("CupoMaximo"),
-                        new Profesor(row.Field<int>("ProfesorDNI"), row.Field<string>("ProfesorNombre"),
+                        new Profesor(row.Field<int>("ProfesorID"), row.Field<int>("ProfesorDNI"),
+                            row.Field<string>("ProfesorNombre"),
                             row.Field<string>("ProfesorApellido"), row.Field<string>("Especialidad")))).ToList();
         }
     }

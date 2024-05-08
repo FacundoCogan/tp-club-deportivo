@@ -4,25 +4,48 @@ namespace Negocio.Modelos
 {
     public class Socio : Persona
     {
-        public List<Actividad> Actividades { get; set; }
-        public List<OrdenPago> OrdenesPago { get; set; }
+        public Socio(int dni, string nombre, string apellido, decimal? cuotaSocial) : base(dni, nombre, apellido)
+        {
+            CuotaSocial = cuotaSocial;
+        }
 
-        public Socio()
+        public Socio(int id, int dni, string nombre, string apellido, decimal? cuotaSocial) : base(id, dni, nombre,
+            apellido)
+        {
+            CuotaSocial = cuotaSocial;
+        }
+
+        public List<Actividad> Actividades { get; set; } = new List<Actividad>();
+        public List<OrdenPago> OrdenesPago { get; set; } = new List<OrdenPago>();
+        public decimal? CuotaSocial { get; set; }
+
+
+        public virtual void Pagar()
         {
         }
 
-        public Socio(int dni, string nombre, string apellido) : base(dni, nombre, apellido)
+        public virtual void InscribirseActividad()
         {
-            Actividades = new List<Actividad>();
-            OrdenesPago = new List<OrdenPago>();
         }
 
-        public virtual void Pagar() { }
-        public virtual void InscribirseActividad() { }
-        public virtual void DarBajaActividad() { }
-        public virtual decimal CalcularMontoOrdenPago() => 0; // Default implementation
-        public virtual void ConsultarActividades() { }
-        public virtual decimal ConsultarDeuda() => 0; // Default implementation
+        public virtual void DarBajaActividad()
+        {
+        }
+
+        public virtual decimal CalcularMontoOrdenPago()
+        {
+            return 0;
+            // Default implementation
+        }
+
+        public virtual void ConsultarActividades()
+        {
+        }
+
+        public virtual decimal ConsultarDeuda()
+        {
+            return 0;
+            // Default implementation
+        }
     }
-
 }

@@ -90,6 +90,16 @@ namespace Datos
             return result;
         }
 
+        protected bool Exists(params OleDbParameter[] parameters)
+        {
+            var query =
+                $"SELECT COUNT(*) FROM {_tableName} WHERE {string.Join(" AND ", parameters.Select(p => $"{p.ParameterName} = ?"))}";
+
+            var result = (int)ExecuteScalar(query, parameters);
+
+            return result > 0;
+        }
+
         protected DataTable GetAll(string whereClause = "", params OleDbParameter[] parameters)
         {
             var query = $"SELECT * FROM {_tableName}";

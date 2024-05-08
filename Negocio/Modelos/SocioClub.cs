@@ -2,15 +2,21 @@
 {
     public class SocioClub : Socio
     {
-        public decimal CuotaSocial { get; set; }
-        public int MaxCantidadActividadesLibres { get; set; }
-
-        public SocioClub(int dni, string nombre, string apellido, decimal cuotaSocial)
-            : base(dni, nombre, apellido)
+        public SocioClub(int dni, string nombre, string apellido, decimal? cuotaSocial)
+            : base(dni, nombre, apellido, cuotaSocial)
         {
             CuotaSocial = cuotaSocial;
             //MaxCantidadActividadesLibres = maxActividadesLibres;
         }
+
+        public SocioClub(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
+            : this(dni, nombre, apellido, cuotaSocial)
+        {
+            ID = id;
+        }
+
+        public int MaxCantidadActividadesLibres { get; set; }
+
 
         public override decimal CalcularMontoOrdenPago()
         {
@@ -18,5 +24,4 @@
             return base.CalcularMontoOrdenPago(); // Replace with custom logic
         }
     }
-
 }

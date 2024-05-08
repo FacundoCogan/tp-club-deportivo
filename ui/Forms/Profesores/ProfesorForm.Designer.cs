@@ -1,6 +1,6 @@
-﻿namespace UI
+﻿namespace UI.Forms
 {
-    partial class ProfesorForm
+    public partial class ProfesorForm
     {
         /// <summary>
         /// Required designer variable.

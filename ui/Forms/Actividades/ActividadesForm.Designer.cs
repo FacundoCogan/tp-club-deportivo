@@ -1,6 +1,6 @@
-﻿namespace UI.Forms.Actividades
+﻿namespace UI.Forms
 {
-    partial class ActividadesForm
+    public partial class ActividadesForm
     {
         /// <summary>
         /// Required designer variable.

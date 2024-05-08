@@ -16,12 +16,17 @@ namespace Datos
 
         public bool Insert(int dni, string nombre, string apellido, string especialidad)
         {
+            if (Exists(dni))
+            {
+                throw new DuplicateNameException("Ya existe un profesor con ese DNI.");
+            }
+
             return Insert(dni, nombre, apellido, new OleDbParameter("Especialidad", especialidad));
         }
 
-        public bool Update(int dni, string nombre, string apellido, string especialidad)
+        public bool Update(int id, int dni, string nombre, string apellido, string especialidad)
         {
-            return Update(dni, nombre, apellido, new OleDbParameter("Especialidad", especialidad));
+            return Update(id, dni, nombre, apellido, new OleDbParameter("Especialidad", especialidad));
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Negocio.Modelos;
 using UI.Controls;
 
-namespace UI
+namespace UI.Forms
 {
     public partial class SociosForm : Form
     {
@@ -38,6 +38,7 @@ namespace UI
         {
             var dt = new DataTable();
 
+            dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("DNI", typeof(int));
             dt.Columns.Add("Nombre", typeof(string));
             dt.Columns.Add("Apellido", typeof(string));
@@ -45,7 +46,7 @@ namespace UI
 
             foreach (var socio in _club.Socios)
             {
-                dt.Rows.Add(socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
+                dt.Rows.Add(socio.ID, socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
             }
 
             _filterableDataGridView.DataSource = dt;
@@ -59,16 +60,15 @@ namespace UI
         private void OnEditClicked(int rowIndex, DataGridViewRow rowData)
         {
             var socio = new SocioClub(
+                (int)rowData.Cells["ID"].Value,
                 (int)rowData.Cells["DNI"].Value,
                 (string)rowData.Cells["Nombre"].Value,
                 (string)rowData.Cells["Apellido"].Value,
                 (decimal)rowData.Cells["Cuota Social"].Value);
 
-            var editSocioForm = new NuevoSocioForm(_club, socio);
+            var editSocioForm = new SocioForm(_club, socio);
 
-            editSocioForm.ShowDialog();
-
-            if (editSocioForm.DialogResult != DialogResult.OK) return;
+            if (editSocioForm.ShowDialog() != DialogResult.OK) return;
 
             LoadSociosData();
         }
@@ -78,7 +78,7 @@ namespace UI
             if (MessageBox.Show("¿Está seguro que desea eliminar este socio?", "Eliminar socio",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            _club.DarBajaSocio((int)rowData.Cells["DNI"].Value);
+            _club.DarBajaSocio((int)rowData.Cells["ID"].Value);
 
             LoadSociosData();
         }

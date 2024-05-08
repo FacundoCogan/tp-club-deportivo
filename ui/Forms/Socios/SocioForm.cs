@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
+using Negocio;
 using Negocio.Modelos;
 using UI.Enums;
 
-namespace UI
+namespace UI.Forms
 {
-    public partial class NuevoSocioForm : Form
+    public partial class SocioForm : Form
     {
         private readonly Club _club;
+        private readonly int _id;
 
-        public NuevoSocioForm(Club club, SocioClub socio = null)
+        public SocioForm(Club club, Socio socio = null)
         {
             InitializeComponent();
             CenterToParent();
@@ -22,6 +24,7 @@ namespace UI
 
             Text = "Editar Socio";
 
+            _id = socio.ID;
             dniTextBox.Text = socio.DNI.ToString();
             nombreTextBox.Text = socio.Nombre;
             apellidoTextBox.Text = socio.Apellido;
@@ -36,29 +39,18 @@ namespace UI
 
         private void crearSocioButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
-                string.IsNullOrWhiteSpace(DNI) || string.IsNullOrWhiteSpace(CuotaSocial))
-            {
-                MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!int.TryParse(DNI, out var dni))
-            {
-                MessageBox.Show("El DNI debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!decimal.TryParse(CuotaSocial, out var cuotaSocial))
-            {
-                MessageBox.Show("La cuota social debe ser un número", "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
-                return;
-            }
-
             try
             {
+                if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
+                    string.IsNullOrWhiteSpace(DNI) || string.IsNullOrWhiteSpace(CuotaSocial))
+                {
+                    throw new Exception("Debe completar todos los campos");
+                }
+
+                var dni = Validator.ValidateDNI(DNI);
+
+                var cuotaSocial = Validator.ValidateCuotaSocial(CuotaSocial);
+
                 if (CurrentMode == FormMode.Create)
                 {
                     _club.CrearSocio(dni, Nombre, Apellido, cuotaSocial);
@@ -68,7 +60,7 @@ namespace UI
                 }
                 else
                 {
-                    _club.EditarSocio(dni, Nombre, Apellido, cuotaSocial);
+                    _club.EditarSocio(_id, dni, Nombre, Apellido, cuotaSocial);
 
                     MessageBox.Show("Socio editado correctamente", "Socio Editado", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);

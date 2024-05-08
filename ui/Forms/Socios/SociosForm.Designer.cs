@@ -1,6 +1,6 @@
-﻿namespace UI
+﻿namespace UI.Forms
 {
-    partial class SociosForm
+    public partial class SociosForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 467);
             this.Name = "SociosForm";
-            this.Text = "SociosForm";
+            this.Text = "Socios";
             this.ResumeLayout(false);
 
         }

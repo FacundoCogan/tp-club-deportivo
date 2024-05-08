@@ -10,7 +10,7 @@ namespace Negocio.Modelos
         private readonly SocioBusiness _socios = new SocioBusiness();
 
 
-        public List<SocioClub> Socios => _socios.GetAllSocios();
+        public List<Socio> Socios => _socios.GetAllSocios();
 
         public List<Profesor> Profesores => _profesores.GetAllProfesores();
 
@@ -20,16 +20,16 @@ namespace Negocio.Modelos
 
 
         public void AgregarActividad(string nombre, string descripcion, string diasHorarios, decimal costo,
-            int cupoMaximo, int profesorDNI)
+            int cupoMaximo, int profesorID)
         {
-            _actividades.Agregar(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorDNI);
+            _actividades.Agregar(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorID);
         }
 
 
         public void EditarActividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
-            int cupoMaximo, int profesorDNI)
+            int cupoMaximo, int profesorID)
         {
-            _actividades.Editar(new Actividad(id, nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorDNI);
+            _actividades.Editar(new Actividad(id, nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorID);
         }
 
         public void EliminarActividad(int ID)
@@ -37,19 +37,19 @@ namespace Negocio.Modelos
             _actividades.Eliminar(ID);
         }
 
-        public void CrearSocio(int dni, string nombre, string apellido, decimal cuotaSocial)
+        public void CrearSocio(int dni, string nombre, string apellido, decimal? cuotaSocial)
         {
-            _socios.Agregar(new SocioClub(dni, nombre, apellido, cuotaSocial));
+            _socios.Agregar(new Socio(dni, nombre, apellido, cuotaSocial));
         }
 
-        public void EditarSocio(int dni, string nombre, string apellido, decimal cuotaSocial)
+        public void EditarSocio(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
         {
-            _socios.Editar(new SocioClub(dni, nombre, apellido, cuotaSocial));
+            _socios.Editar(new Socio(id, dni, nombre, apellido, cuotaSocial));
         }
 
-        public bool DarBajaSocio(int dniSocio)
+        public bool DarBajaSocio(int idSocio)
         {
-            return _socios.Eliminar(dniSocio);
+            return _socios.Eliminar(idSocio);
         }
 
         public bool CrearProfesor(int dni, string nombre, string apellido, string especialidad)
@@ -57,14 +57,14 @@ namespace Negocio.Modelos
             return _profesores.Agregar(new Profesor(dni, nombre, apellido, especialidad));
         }
 
-        public bool EditarProfesor(int dni, string nombre, string apellido, string especialidad)
+        public bool EditarProfesor(int id, int dni, string nombre, string apellido, string especialidad)
         {
-            return _profesores.Editar(new Profesor(dni, nombre, apellido, especialidad));
+            return _profesores.Editar(new Profesor(id, dni, nombre, apellido, especialidad));
         }
 
-        public void DarBajaProfesor(int dniProfesor)
+        public bool DarBajaProfesor(int idProfesor)
         {
-            _profesores.Eliminar(dniProfesor);
+            return _profesores.Eliminar(idProfesor);
         }
 
         public void ConsultarActividades()

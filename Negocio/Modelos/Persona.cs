@@ -1,21 +1,23 @@
 ﻿namespace Negocio.Modelos
 {
-    public class Persona
+    public abstract class Persona
     {
-        public Persona()
-        {
-        }
-
-        public Persona(int dni, string nombre, string apellido)
+        protected Persona(int dni, string nombre, string apellido)
         {
             DNI = dni;
             Nombre = nombre;
             Apellido = apellido;
         }
 
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public int DNI { get; set; }
+        protected Persona(int id, int dni, string nombre, string apellido) : this(dni, nombre, apellido)
+        {
+            ID = id;
+        }
+
+        public int ID { get; protected set; }
+        public string Nombre { get; protected set; }
+        public string Apellido { get; protected set; }
+        public int DNI { get; protected set; }
 
         public string NombreCompleto => $"{Nombre} {Apellido}";
 

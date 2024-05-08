@@ -54,7 +54,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
@@ -96,35 +98,23 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Enums\FormMode.cs" />
-    <Compile Include="Forms\ProfesorForm.cs">
+    <Compile Include="Forms\Profesores\ProfesorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProfesorForm.Designer.cs">
+    <Compile Include="Forms\Profesores\ProfesorForm.Designer.cs">
       <DependentUpon>ProfesorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProfesoresForm.cs">
+    <Compile Include="Forms\Profesores\ProfesoresForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProfesoresForm.Designer.cs">
+    <Compile Include="Forms\Profesores\ProfesoresForm.Designer.cs">
       <DependentUpon>ProfesoresForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SeleccionarActAElim.cs">
+    <Compile Include="Forms\Socios\SocioForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SeleccionarActAElim.Designer.cs">
-      <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SeleccionarActividadForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SeleccionarActividadForm.Designer.cs">
-      <DependentUpon>SeleccionarActividadForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Socios\NuevoSocioForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Socios\NuevoSocioForm.Designer.cs">
-      <DependentUpon>NuevoSocioForm.cs</DependentUpon>
+    <Compile Include="Forms\Socios\SocioForm.Designer.cs">
+      <DependentUpon>SocioForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,17 +130,11 @@
     <EmbeddedResource Include="Forms\Actividades\ActividadesForm.resx">
       <DependentUpon>ActividadesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfesorForm.resx">
+    <EmbeddedResource Include="Forms\Profesores\ProfesorForm.resx">
       <DependentUpon>ProfesorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfesoresForm.resx">
+    <EmbeddedResource Include="Forms\Profesores\ProfesoresForm.resx">
       <DependentUpon>ProfesoresForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SeleccionarActAElim.resx">
-      <DependentUpon>SeleccionarActAElim.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SeleccionarActividadForm.resx">
-      <DependentUpon>SeleccionarActividadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ClubForm.resx">
       <DependentUpon>ClubForm.cs</DependentUpon>
@@ -158,8 +142,8 @@
     <EmbeddedResource Include="Forms\Actividades\ActividadForm.resx">
       <DependentUpon>ActividadForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Socios\NuevoSocioForm.resx">
-      <DependentUpon>NuevoSocioForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Socios\SocioForm.resx">
+      <DependentUpon>SocioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

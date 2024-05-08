@@ -1,7 +1,5 @@
 ﻿using System.Data;
 using System.Data.OleDb;
-using System.Linq;
-using System.Net;
 
 namespace Datos
 {
@@ -19,16 +17,16 @@ namespace Datos
         public DataTable GetAllActividadesDetallado()
         {
             const string query =
-                "SELECT A.*, p.DNI as ProfesorDNI, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, p.Especialidad " +
+                "SELECT A.*, p.ID as ProfesorID, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, p.Especialidad " +
                 "FROM Actividades A " +
-                "INNER JOIN Profesores P ON A.ProfesorDNI = P.DNI " +
+                "INNER JOIN Profesores P ON A.ProfesorID = P.ID " +
                 "WHERE A.Activo = ?";
 
             return ExecuteQuery(query, new OleDbParameter("Activo", true));
         }
 
         public bool Insert(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
-            int profesorDNI)
+            int profesorID)
         {
             OleDbParameter[] parameters =
             {
@@ -37,14 +35,15 @@ namespace Datos
                 new OleDbParameter("DiasHorarios", diasHorarios),
                 new OleDbParameter("Costo", costo),
                 new OleDbParameter("CupoMaximo", cupoMaximo),
-                new OleDbParameter("ProfesorDNI", profesorDNI)
+                new OleDbParameter("ProfesorID", profesorID)
             };
 
             return Insert(parameters);
         }
 
-        public bool Update(int ID, string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
-                       int profesorDNI)
+        public bool Update(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
+            int cupoMaximo,
+            int profesorID)
         {
             OleDbParameter[] baseParameters =
             {
@@ -53,10 +52,10 @@ namespace Datos
                 new OleDbParameter("DiasHorarios", diasHorarios),
                 new OleDbParameter("Costo", costo),
                 new OleDbParameter("CupoMaximo", cupoMaximo),
-                new OleDbParameter("ProfesorDNI", profesorDNI),
+                new OleDbParameter("ProfesorID", profesorID)
             };
 
-            var whereParameter = new OleDbParameter("ID", ID);
+            var whereParameter = new OleDbParameter("ID", id);
 
             return Update(baseParameters, "ID = ?", whereParameter);
         }

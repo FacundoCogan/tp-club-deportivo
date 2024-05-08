@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Negocio.Modelos;
 using UI.Controls;
 
-namespace UI.Forms.Actividades
+namespace UI.Forms
 {
     public partial class ActividadesForm : Form
     {
@@ -67,13 +67,11 @@ namespace UI.Forms.Actividades
                 (string)rowData.Cells["Dias y Horarios"].Value,
                 (decimal)rowData.Cells["Costo"].Value,
                 (int)rowData.Cells["Cupo Máximo"].Value);
-                
 
-            var editSocioForm = new ActividadForm(_club, actividad);
 
-            editSocioForm.ShowDialog();
+            var editSocioForm = ActividadForm.CreateActividadForm(_club, actividad);
 
-            if (editSocioForm.DialogResult != DialogResult.OK) return;
+            if (editSocioForm == null || editSocioForm.ShowDialog() != DialogResult.OK) return;
 
             LoadActividadesData();
         }

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
+using Negocio;
 using Negocio.Modelos;
 using UI.Enums;
 
-namespace UI
+namespace UI.Forms
 {
     public partial class ProfesorForm : Form
     {
         private readonly Club _club;
+        private readonly int _id;
 
         public ProfesorForm(Club club, Profesor profesor = null)
         {
@@ -22,6 +24,7 @@ namespace UI
 
             Text = "Editar Profesor";
 
+            _id = profesor.ID;
             dniTextBox.Text = profesor.DNI.ToString();
             nombreTextBox.Text = profesor.Nombre;
             apellidoTextBox.Text = profesor.Apellido;
@@ -36,21 +39,16 @@ namespace UI
 
         private void crearSocioButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
-                string.IsNullOrWhiteSpace(DNI) || string.IsNullOrWhiteSpace(Especialidad))
-            {
-                MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!int.TryParse(DNI, out var dni))
-            {
-                MessageBox.Show("El DNI debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             try
             {
+                if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
+                    string.IsNullOrWhiteSpace(DNI) || string.IsNullOrWhiteSpace(Especialidad))
+                {
+                    throw new Exception("Debe completar todos los campos");
+                }
+
+                var dni = Validator.ValidateDNI(DNI);
+
                 if (CurrentMode == FormMode.Create)
                 {
                     _club.CrearProfesor(dni, Nombre, Apellido, Especialidad);
@@ -60,7 +58,7 @@ namespace UI
                 }
                 else
                 {
-                    _club.EditarProfesor(dni, Nombre, Apellido, Especialidad);
+                    _club.EditarProfesor(_id, dni, Nombre, Apellido, Especialidad);
 
                     MessageBox.Show("Profesor editado correctamente", "Socio Editado", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);

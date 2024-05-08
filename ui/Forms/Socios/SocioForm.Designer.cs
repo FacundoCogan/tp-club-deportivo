@@ -1,6 +1,6 @@
-﻿namespace UI
+﻿namespace UI.Forms
 {
-    partial class NuevoSocioForm
+    partial class SocioForm
     {
         /// <summary>
         /// Required designer variable.
@@ -113,7 +113,7 @@
             this.cuotaSocialTextBox.Size = new System.Drawing.Size(159, 20);
             this.cuotaSocialTextBox.TabIndex = 3;
             // 
-            // NuevoSocioForm
+            // SocioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,7 +127,7 @@
             this.Controls.Add(this.cuotaSocialTextBox);
             this.Controls.Add(this.apellidoTextBox);
             this.Controls.Add(this.nombreTextBox);
-            this.Name = "NuevoSocioForm";
+            this.Name = "SocioForm";
             this.Text = "Nuevo Socio";
             this.ResumeLayout(false);
             this.PerformLayout();

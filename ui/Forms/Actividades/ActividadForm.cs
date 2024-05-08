@@ -3,36 +3,34 @@ using System.Windows.Forms;
 using Negocio.Modelos;
 using UI.Enums;
 
-namespace UI
+namespace UI.Forms
 {
     public partial class ActividadForm : Form
     {
         private readonly Club _club;
         private readonly int _id;
 
-        public ActividadForm(Club club, Actividad actividad = null)
+        private ActividadForm(Club club, Actividad actividad = null)
         {
             _club = club;
-
 
             InitializeComponent();
             CenterToScreen();
 
-            if (actividad != null)
-            {
-                CurrentMode = FormMode.Edit;
-                Text = "Editar Actividad";
-                buttCrearAct.Text = "Editar";
-                _id = actividad.ID;
-                nombreTextBox.Text = actividad.Nombre;
-                descripcionTextBox.Text = actividad.Descripcion;
-                diasHorariosTextBox.Text = actividad.DiasHorarios;
-                costoTextBox.Text = actividad.Costo.ToString();
-                cupoMaximoNumericUpDown.Value = actividad.CupoMaximo;
-                profesorComboBox.SelectedItem = actividad.Profesor;
-            }
             profesorComboBox.DataSource = _club.Profesores;
             profesorComboBox.DisplayMember = "NombreCompleto";
+
+            if (actividad == null) return;
+
+            CurrentMode = FormMode.Edit;
+            Text = "Editar Actividad";
+            _id = actividad.ID;
+            nombreTextBox.Text = actividad.Nombre;
+            descripcionTextBox.Text = actividad.Descripcion;
+            diasHorariosTextBox.Text = actividad.DiasHorarios;
+            costoTextBox.Text = actividad.Costo.ToString();
+            cupoMaximoNumericUpDown.Value = actividad.CupoMaximo;
+            profesorComboBox.SelectedItem = actividad.Profesor;
         }
 
         private string Nombre => nombreTextBox.Text;
@@ -43,38 +41,47 @@ namespace UI
         private Profesor Profesor => (Profesor)profesorComboBox.SelectedItem;
         public FormMode CurrentMode { get; } = FormMode.Create;
 
+        public static ActividadForm CreateActividadForm(Club club, Actividad actividad = null)
+        {
+            if (club.Profesores.Count == 0)
+            {
+                MessageBox.Show("No hay profesores disponibles", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
+            return new ActividadForm(club, actividad);
+        }
+
         private void buttCrearAct_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Descripcion) ||
-                string.IsNullOrWhiteSpace(DiasHorarios) ||
-                string.IsNullOrWhiteSpace(Costo) ||
-                CupoMaximo == 0)
-            {
-                MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (!decimal.TryParse(Costo, out var costo))
-            {
-                MessageBox.Show("El costo debe ser un número", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             try
             {
-                if(CurrentMode == FormMode.Edit)
+                if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Descripcion) ||
+                    string.IsNullOrWhiteSpace(DiasHorarios) ||
+                    string.IsNullOrWhiteSpace(Costo) ||
+                    CupoMaximo == 0)
                 {
-                    _club.EditarActividad(_id, Nombre, Descripcion, DiasHorarios, costo, CupoMaximo, Profesor.DNI);
+                    throw new Exception("Debe completar todos los campos");
+                }
+
+                if (!decimal.TryParse(Costo, out var costo))
+                {
+                    throw new Exception("El costo debe ser un número");
+                }
+
+                if (CurrentMode == FormMode.Edit)
+                {
+                    _club.EditarActividad(_id, Nombre, Descripcion, DiasHorarios, costo, CupoMaximo, Profesor.ID);
 
                     MessageBox.Show("Actividad editada correctamente", "Actividad Editada", MessageBoxButtons.OK,
-                                               MessageBoxIcon.Information);
+                        MessageBoxIcon.Information);
                 }
                 else
                 {
-                    _club.AgregarActividad(Nombre, Descripcion, DiasHorarios, costo, CupoMaximo, Profesor.DNI);
+                    _club.AgregarActividad(Nombre, Descripcion, DiasHorarios, costo, CupoMaximo, Profesor.ID);
 
                     MessageBox.Show("Actividad creada correctamente", "Actividad Creada", MessageBoxButtons.OK,
-                                               MessageBoxIcon.Information);
+                        MessageBoxIcon.Information);
                 }
 
                 DialogResult = DialogResult.OK;
