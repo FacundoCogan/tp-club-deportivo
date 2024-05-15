@@ -30,6 +30,7 @@ namespace UI.Forms
 
             _filterableDataGridView.EditClicked += OnEditClicked;
             _filterableDataGridView.DeleteClicked += OnDeleteClicked;
+            _filterableDataGridView.GenerateOrderClicked += OnGenerateClicked;
 
             Controls.Add(_filterableDataGridView);
         }
@@ -82,5 +83,19 @@ namespace UI.Forms
 
             LoadSociosData();
         }
+
+        private void OnGenerateClicked(int rowIndex, DataGridViewRow rowData)
+        {
+            var socio = new SocioClub(
+            (int)rowData.Cells["ID"].Value,
+            (int)rowData.Cells["DNI"].Value,
+            (string)rowData.Cells["Nombre"].Value,
+            (string)rowData.Cells["Apellido"].Value,
+            (decimal)rowData.Cells["Cuota Social"].Value);
+
+            _club.GenerarOrdenPagoSocio(socio);
+        }
+
+
     }
 }

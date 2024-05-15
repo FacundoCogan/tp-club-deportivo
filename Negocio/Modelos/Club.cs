@@ -79,10 +79,10 @@ namespace Negocio.Modelos
         {
         }
 
-        public OrdenPago GenerarOrdenPagoSocio(Socio socio)
+        public void GenerarOrdenPagoSocio(Socio socio)
         {
-            return null;
-        } // Placeholder for payment order generation
+            socio.CalcularMontoOrdenPago();
+        } 
 
         public void GenerarOrdenesPagoSocios()
         {

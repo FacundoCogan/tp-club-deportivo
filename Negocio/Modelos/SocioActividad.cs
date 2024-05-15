@@ -9,7 +9,12 @@
 
         public override decimal CalcularMontoOrdenPago()
         {
-            return base.CalcularMontoOrdenPago();
+            decimal monto = 0;
+            foreach (var actividad in Actividades)
+            {
+                monto += actividad.Costo;
+            }
+            return monto;
         }
     }
 }

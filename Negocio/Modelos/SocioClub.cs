@@ -2,11 +2,13 @@
 {
     public class SocioClub : Socio
     {
+        public static int MaxCantidadActividadesLibres { get; set; }
+
         public SocioClub(int dni, string nombre, string apellido, decimal? cuotaSocial)
             : base(dni, nombre, apellido, cuotaSocial)
         {
             CuotaSocial = cuotaSocial;
-            //MaxCantidadActividadesLibres = maxActividadesLibres;
+            MaxCantidadActividadesLibres = 5;
         }
 
         public SocioClub(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
@@ -15,13 +17,23 @@
             ID = id;
         }
 
-        public int MaxCantidadActividadesLibres { get; set; }
-
 
         public override decimal CalcularMontoOrdenPago()
         {
-            // Custom implementation for SocioClub
-            return base.CalcularMontoOrdenPago(); // Replace with custom logic
+            decimal monto = 0;
+            if(Actividades.Count > MaxCantidadActividadesLibres)
+            {
+                for (int i = MaxCantidadActividadesLibres; i < Actividades.Count; i++)
+                {
+                    monto += CuotaSocial.Value + (Actividades[i].Costo * 0.5m);
+                }
+            }
+            else
+            {
+                monto = CuotaSocial.Value;
+            }
+            return monto;
+
         }
     }
 }

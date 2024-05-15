@@ -35,7 +35,6 @@ namespace Negocio.Modelos
         public virtual decimal CalcularMontoOrdenPago()
         {
             return 0;
-            // Default implementation
         }
 
         public virtual void ConsultarActividades()

@@ -33,6 +33,7 @@ namespace UI.Controls
 
         public event ActionHandler EditClicked;
         public event ActionHandler DeleteClicked;
+        public event ActionHandler GenerateOrderClicked;
 
         private void InitializeComponents()
         {
@@ -68,6 +69,7 @@ namespace UI.Controls
                 _dataGridView.Columns[column.ColumnName].DisplayIndex = dataIndex++;
             }
 
+            _dataGridView.Columns["GenerateOrder"].DisplayIndex = dataIndex++;
             _dataGridView.Columns["Edit"].DisplayIndex = dataIndex++;
             _dataGridView.Columns["Delete"].DisplayIndex = dataIndex;
         }
@@ -90,8 +92,17 @@ namespace UI.Controls
                 UseColumnTextForButtonValue = true
             };
 
+            var generateOrderButton = new DataGridViewButtonColumn
+            {
+                HeaderText = "",
+                Text = "Generar orden",
+                Name = "GenerateOrder",
+                UseColumnTextForButtonValue = true
+            };
+
             _dataGridView.Columns.Add(editButton);
             _dataGridView.Columns.Add(deleteButton);
+            _dataGridView.Columns.Add(generateOrderButton);
         }
 
         private void TextBoxFilter_TextChanged(object sender, EventArgs e)
@@ -141,6 +152,10 @@ namespace UI.Controls
             else if (e.ColumnIndex == _dataGridView.Columns["Delete"].Index)
             {
                 DeleteClicked?.Invoke(e.RowIndex, rowData);
+            }
+            else if (e.ColumnIndex == _dataGridView.Columns["GenerateOrder"].Index)
+            {
+                GenerateOrderClicked?.Invoke(e.RowIndex, rowData);
             }
         }
     }
