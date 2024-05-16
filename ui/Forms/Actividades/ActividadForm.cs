@@ -43,13 +43,14 @@ namespace UI.Forms
 
         public static ActividadForm CreateActividadForm(Club club, Actividad actividad = null)
         {
-            if (club.Profesores.Count == 0)
+            if (club.Profesores.Count != 0)
             {
-                MessageBox.Show("No hay profesores disponibles", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
+                return new ActividadForm(club, actividad);
             }
 
-            return new ActividadForm(club, actividad);
+            MessageBox.Show("No hay profesores disponibles", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return null;
         }
 
         private void buttCrearAct_Click(object sender, EventArgs e)

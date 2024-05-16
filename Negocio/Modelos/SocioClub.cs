@@ -1,9 +1,10 @@
-﻿namespace Negocio.Modelos
+﻿using System;
+using System.Linq;
+
+namespace Negocio.Modelos
 {
     public class SocioClub : Socio
     {
-        public static int MaxCantidadActividadesLibres { get; set; }
-
         public SocioClub(int dni, string nombre, string apellido, decimal? cuotaSocial)
             : base(dni, nombre, apellido, cuotaSocial)
         {
@@ -17,23 +18,18 @@
             ID = id;
         }
 
+        public static int MaxCantidadActividadesLibres { get; set; }
+
 
         public override decimal CalcularMontoOrdenPago()
         {
-            decimal monto = 0;
-            if(Actividades.Count > MaxCantidadActividadesLibres)
-            {
-                for (int i = MaxCantidadActividadesLibres; i < Actividades.Count; i++)
-                {
-                    monto += CuotaSocial.Value + (Actividades[i].Costo * 0.5m);
-                }
-            }
-            else
-            {
-                monto = CuotaSocial.Value;
-            }
-            return monto;
+            var monto = CuotaSocial.Value;
+            var limiteActividadesLibres = Math.Max(0, Actividades.Count - MaxCantidadActividadesLibres);
 
+            monto += Actividades.Skip(MaxCantidadActividadesLibres).Take(limiteActividadesLibres)
+                .Sum(actividad => actividad.Costo * 0.5m);
+
+            return monto;
         }
     }
 }

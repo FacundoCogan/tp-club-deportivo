@@ -6,6 +6,7 @@ namespace Negocio.Modelos
     public class Club
     {
         private readonly ActividadBusiness _actividades = new ActividadBusiness();
+        private readonly OrdenPagoBusiness _ordenPago = new OrdenPagoBusiness();
         private readonly ProfesorBusiness _profesores = new ProfesorBusiness();
         private readonly SocioBusiness _socios = new SocioBusiness();
 
@@ -79,10 +80,12 @@ namespace Negocio.Modelos
         {
         }
 
-        public void GenerarOrdenPagoSocio(Socio socio)
+        public bool GenerarOrdenPagoSocio(Socio socio)
         {
-            socio.CalcularMontoOrdenPago();
-        } 
+            var monto = socio.CalcularMontoOrdenPago();
+
+            return _ordenPago.Agregar(new OrdenPago(socio.ID, monto));
+        }
 
         public void GenerarOrdenesPagoSocios()
         {

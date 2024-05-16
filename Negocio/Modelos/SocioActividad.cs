@@ -1,4 +1,6 @@
-﻿namespace Negocio.Modelos
+﻿using System.Linq;
+
+namespace Negocio.Modelos
 {
     public class SocioActividad : Socio
     {
@@ -9,12 +11,7 @@
 
         public override decimal CalcularMontoOrdenPago()
         {
-            decimal monto = 0;
-            foreach (var actividad in Actividades)
-            {
-                monto += actividad.Costo;
-            }
-            return monto;
+            return Actividades.Sum(actividad => actividad.Costo);
         }
     }
 }

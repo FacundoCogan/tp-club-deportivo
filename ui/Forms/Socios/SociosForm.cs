@@ -1,5 +1,5 @@
-﻿using System.Data;
-using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Negocio.Modelos;
 using UI.Controls;
@@ -9,7 +9,7 @@ namespace UI.Forms
     public partial class SociosForm : Form
     {
         private readonly Club _club;
-        private FilterableDataGridView _filterableDataGridView;
+        private FilterableDataGridView<Socio> _filterableDataGridView;
 
         public SociosForm(Club club)
         {
@@ -18,84 +18,65 @@ namespace UI.Forms
             InitializeComponent();
             CenterToParent();
             SetupCustomDataGridView();
-            LoadSociosData();
         }
 
         private void SetupCustomDataGridView()
         {
-            _filterableDataGridView = new FilterableDataGridView
+            _filterableDataGridView = new FilterableDataGridView<Socio>
             {
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                DataFetcher = () => _club.Socios,
+                DisplayProperties = new List<string> { "ID", "DNI", "Nombre", "Apellido", "CuotaSocial" }
             };
+
+            _filterableDataGridView.AddCustomButton("Generar orden", OnGeneratePaymentOrderClicked);
 
             _filterableDataGridView.EditClicked += OnEditClicked;
             _filterableDataGridView.DeleteClicked += OnDeleteClicked;
-            _filterableDataGridView.GenerateOrderClicked += OnGenerateClicked;
 
             Controls.Add(_filterableDataGridView);
         }
 
-        private void LoadSociosData()
+        private void OnEditClicked(Socio socio)
         {
-            var dt = new DataTable();
-
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("DNI", typeof(int));
-            dt.Columns.Add("Nombre", typeof(string));
-            dt.Columns.Add("Apellido", typeof(string));
-            dt.Columns.Add("Cuota Social", typeof(decimal));
-
-            foreach (var socio in _club.Socios)
-            {
-                dt.Rows.Add(socio.ID, socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
-            }
-
-            _filterableDataGridView.DataSource = dt;
-
-            // Set currency format
-            _filterableDataGridView.Columns["Cuota Social"].DefaultCellStyle.Format = "C2";
-            _filterableDataGridView.Columns["Cuota Social"].DefaultCellStyle.FormatProvider =
-                CultureInfo.GetCultureInfo("es-AR");
-        }
-
-        private void OnEditClicked(int rowIndex, DataGridViewRow rowData)
-        {
-            var socio = new SocioClub(
-                (int)rowData.Cells["ID"].Value,
-                (int)rowData.Cells["DNI"].Value,
-                (string)rowData.Cells["Nombre"].Value,
-                (string)rowData.Cells["Apellido"].Value,
-                (decimal)rowData.Cells["Cuota Social"].Value);
-
             var editSocioForm = new SocioForm(_club, socio);
 
-            if (editSocioForm.ShowDialog() != DialogResult.OK) return;
-
-            LoadSociosData();
+            editSocioForm.ShowDialog();
         }
 
-        private void OnDeleteClicked(int rowIndex, DataGridViewRow rowData)
+        private void OnDeleteClicked(Socio socio)
         {
             if (MessageBox.Show("¿Está seguro que desea eliminar este socio?", "Eliminar socio",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            _club.DarBajaSocio((int)rowData.Cells["ID"].Value);
+            try
+            {
+                _club.DarBajaSocio(socio.ID);
 
-            LoadSociosData();
+                MessageBox.Show("Socio eliminado correctamente", "Socio eliminado", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
-        private void OnGenerateClicked(int rowIndex, DataGridViewRow rowData)
+        private void OnGeneratePaymentOrderClicked(Socio socio)
         {
-            var socio = new SocioClub(
-            (int)rowData.Cells["ID"].Value,
-            (int)rowData.Cells["DNI"].Value,
-            (string)rowData.Cells["Nombre"].Value,
-            (string)rowData.Cells["Apellido"].Value,
-            (decimal)rowData.Cells["Cuota Social"].Value);
+            try
+            {
+                _club.GenerarOrdenPagoSocio(socio);
 
-            _club.GenerarOrdenPagoSocio(socio);
+                MessageBox.Show("Orden de pago generada correctamente", "Orden de pago generada", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
-
-
     }
 }

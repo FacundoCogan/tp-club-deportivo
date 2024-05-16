@@ -1,39 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 namespace UI.Controls
 {
-    public class FilterableDataGridView : UserControl
+    public class FilterableDataGridView<T> : UserControl
     {
-        public delegate void ActionHandler(int rowIndex, DataGridViewRow rowData);
+        public delegate void ActionHandler(T entity);
 
+        private readonly List<ButtonDetails> _customButtons = new List<ButtonDetails>();
         private BindingSource _bindingSource;
         private DataGridView _dataGridView;
+        private List<T> _dataSource;
+        private List<string> _displayProperties;
         private TextBox _textBoxFilter;
 
         public FilterableDataGridView()
         {
             InitializeComponents();
-            SetupDataGridView();
         }
 
-        public DataTable DataSource
+        public List<string> DisplayProperties
         {
-            get => (DataTable)_bindingSource.DataSource;
+            get => _displayProperties;
             set
             {
-                _bindingSource.DataSource = value;
-                _dataGridView.DataSource = _bindingSource;
+                _displayProperties = value;
+                RefreshDataSource();
             }
         }
 
-        public DataGridViewColumnCollection Columns => _dataGridView.Columns;
+        public Func<List<T>> DataFetcher { get; set; }
+
+        public List<T> DataSource
+        {
+            get => _dataSource;
+            private set
+            {
+                _dataSource = value;
+                _bindingSource.DataSource = ConvertToDataTable(_dataSource);
+                _dataGridView.DataSource = _bindingSource;
+                SetupDataGridView();
+            }
+        }
 
         public event ActionHandler EditClicked;
         public event ActionHandler DeleteClicked;
-        public event ActionHandler GenerateOrderClicked;
 
         private void InitializeComponents()
         {
@@ -43,7 +59,7 @@ namespace UI.Controls
 
             _dataGridView.AllowUserToAddRows = false;
             _dataGridView.AllowUserToDeleteRows = false;
-            _dataGridView.AllowUserToOrderColumns = true;
+            _dataGridView.AllowUserToOrderColumns = false;
             _dataGridView.AllowUserToResizeColumns = false;
             _dataGridView.AllowUserToResizeRows = false;
             _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -52,7 +68,7 @@ namespace UI.Controls
             _dataGridView.RowHeadersVisible = false;
 
             _dataGridView.CellClick += DataGridView_CellClick;
-            _dataGridView.DataBindingComplete += DataGridView_DataBindingComplete;
+            _dataGridView.DataBindingComplete += (sender, e) => SetColumnDisplayOrder();
 
             _textBoxFilter.TextChanged += TextBoxFilter_TextChanged;
 
@@ -60,49 +76,107 @@ namespace UI.Controls
             Controls.Add(_textBoxFilter);
         }
 
-        private void DataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            var dataIndex = 0;
-
-            foreach (DataColumn column in ((DataTable)_bindingSource.DataSource).Columns)
-            {
-                _dataGridView.Columns[column.ColumnName].DisplayIndex = dataIndex++;
-            }
-
-            _dataGridView.Columns["GenerateOrder"].DisplayIndex = dataIndex++;
-            _dataGridView.Columns["Edit"].DisplayIndex = dataIndex++;
-            _dataGridView.Columns["Delete"].DisplayIndex = dataIndex;
-        }
-
         private void SetupDataGridView()
         {
+            if (_displayProperties == null || _dataSource == null) return;
+
+            _dataGridView.Columns.Clear();
+
+            // Add columns based on display properties
+            foreach (var prop in _displayProperties)
+            {
+                var column = new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = prop,
+                    HeaderText = prop,
+                    Name = prop
+                };
+
+                _dataGridView.Columns.Add(column);
+            }
+
+            // Add custom button columns
+            foreach (var button in _customButtons)
+            {
+                var buttonColumn = new DataGridViewButtonColumn
+                {
+                    HeaderText = "",
+                    Name = button.Name,
+                    Text = button.Text,
+                    UseColumnTextForButtonValue = true
+                };
+
+                _dataGridView.Columns.Add(buttonColumn);
+            }
+
+            // Add edit and delete button columns
             var editButton = new DataGridViewButtonColumn
             {
                 HeaderText = "",
+                Name = "Edit",
                 Text = "Editar",
-                UseColumnTextForButtonValue = true,
-                Name = "Edit"
+                UseColumnTextForButtonValue = true
             };
 
             var deleteButton = new DataGridViewButtonColumn
             {
                 HeaderText = "",
-                Text = "Eliminar",
                 Name = "Delete",
-                UseColumnTextForButtonValue = true
-            };
-
-            var generateOrderButton = new DataGridViewButtonColumn
-            {
-                HeaderText = "",
-                Text = "Generar orden",
-                Name = "GenerateOrder",
+                Text = "Eliminar",
                 UseColumnTextForButtonValue = true
             };
 
             _dataGridView.Columns.Add(editButton);
             _dataGridView.Columns.Add(deleteButton);
-            _dataGridView.Columns.Add(generateOrderButton);
+
+            ApplyColumnFormatting();
+        }
+
+        private void SetColumnDisplayOrder()
+        {
+            var dataIndex = 0;
+
+            // Ensure the data source columns are displayed first
+            foreach (var prop in _displayProperties.Where(prop => _dataGridView.Columns.Contains(prop)))
+            {
+                _dataGridView.Columns[prop].DisplayIndex = dataIndex++;
+            }
+
+            // Set the display indices for custom buttons if they exist
+            foreach (var button in _customButtons.Where(button => _dataGridView.Columns.Contains(button.Name)))
+            {
+                _dataGridView.Columns[button.Name].DisplayIndex = dataIndex++;
+            }
+
+            // Set the display indices for Edit and Delete buttons
+            if (_dataGridView.Columns.Contains("Edit"))
+            {
+                _dataGridView.Columns["Edit"].DisplayIndex = dataIndex++;
+            }
+
+            if (_dataGridView.Columns.Contains("Delete"))
+            {
+                _dataGridView.Columns["Delete"].DisplayIndex = dataIndex++;
+            }
+        }
+
+        private void ApplyColumnFormatting()
+        {
+            foreach (DataGridViewColumn column in _dataGridView.Columns)
+            {
+                if (column.ValueType != typeof(decimal) && column.ValueType != typeof(double) &&
+                    column.ValueType != typeof(float)) continue;
+
+                column.DefaultCellStyle.Format = "C2";
+                column.DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("es-AR");
+            }
+        }
+
+        public void AddCustomButton(string buttonText, ActionHandler handler)
+        {
+            var buttonName = Guid.NewGuid().ToString();
+            _customButtons.Add(new ButtonDetails { Text = buttonText, Handler = handler, Name = buttonName });
+            SetupDataGridView();
         }
 
         private void TextBoxFilter_TextChanged(object sender, EventArgs e)
@@ -143,20 +217,78 @@ namespace UI.Controls
         {
             if (e.RowIndex < 0) return;
 
-            var rowData = _dataGridView.Rows[e.RowIndex];
+            var entity = _dataSource[e.RowIndex];
+
+            foreach (var button in _customButtons.Where(button =>
+                         e.ColumnIndex == _dataGridView.Columns[button.Name].Index))
+            {
+                button.Handler?.Invoke(entity);
+                return;
+            }
 
             if (e.ColumnIndex == _dataGridView.Columns["Edit"].Index)
             {
-                EditClicked?.Invoke(e.RowIndex, rowData);
+                EditClicked?.Invoke(entity);
             }
             else if (e.ColumnIndex == _dataGridView.Columns["Delete"].Index)
             {
-                DeleteClicked?.Invoke(e.RowIndex, rowData);
+                DeleteClicked?.Invoke(entity);
             }
-            else if (e.ColumnIndex == _dataGridView.Columns["GenerateOrder"].Index)
+
+            RefreshDataSource();
+        }
+
+        public void RefreshDataSource()
+        {
+            if (DataFetcher != null)
             {
-                GenerateOrderClicked?.Invoke(e.RowIndex, rowData);
+                DataSource = DataFetcher();
             }
+        }
+
+        private DataTable ConvertToDataTable(List<T> data)
+        {
+            var dataTable = new DataTable();
+
+            // Get the properties of the type T
+            var properties = typeof(T).GetProperties()
+                .Where(p => _displayProperties == null || _displayProperties.Contains(p.Name))
+                .ToArray();
+
+            // Add columns to the DataTable with the appropriate type
+            foreach (var prop in properties)
+            {
+                var propType = prop.PropertyType;
+
+                // Check if the property is nullable and use the underlying type if it is
+                if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    propType = Nullable.GetUnderlyingType(propType);
+                }
+
+                dataTable.Columns.Add(prop.Name, propType);
+            }
+
+            // Add rows to the DataTable
+            foreach (var item in data)
+            {
+                var values = new object[properties.Length];
+                for (var i = 0; i < properties.Length; i++)
+                {
+                    values[i] = properties[i].GetValue(item) ?? DBNull.Value;
+                }
+
+                dataTable.Rows.Add(values);
+            }
+
+            return dataTable;
+        }
+
+        private class ButtonDetails
+        {
+            public string Text { get; set; }
+            public string Name { get; set; }
+            public ActionHandler Handler { get; set; }
         }
     }
 }
