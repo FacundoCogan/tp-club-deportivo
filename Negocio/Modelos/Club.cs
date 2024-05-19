@@ -6,10 +6,10 @@ namespace Negocio.Modelos
     public class Club
     {
         private readonly ActividadBusiness _actividades = new ActividadBusiness();
+        private readonly InscripcionBusiness _inscripciones = new InscripcionBusiness();
         private readonly OrdenPagoBusiness _ordenPago = new OrdenPagoBusiness();
         private readonly ProfesorBusiness _profesores = new ProfesorBusiness();
         private readonly SocioBusiness _socios = new SocioBusiness();
-
 
         public List<Socio> Socios => _socios.GetAllSocios();
 
@@ -19,6 +19,11 @@ namespace Negocio.Modelos
         public List<Actividad> Actividades => _actividades.GetAllActividadesBasico();
         public List<Actividad> ActividadesDetallado => _actividades.GetAllActividadesDetallado();
 
+
+        public List<Actividad> GetActividadesDisponiblesSocio(int idSocio)
+        {
+            return _inscripciones.GetActividadesDisponiblesSocio(idSocio);
+        }
 
         public void AgregarActividad(string nombre, string descripcion, string diasHorarios, decimal costo,
             int cupoMaximo, int profesorID)
@@ -72,8 +77,9 @@ namespace Negocio.Modelos
         {
         }
 
-        public void InscribirSocioActividad(Socio socio, Actividad actividad)
+        public bool InscribirSocioActividad(int idSocio, int idActividad)
         {
+            return _inscripciones.InscribirSocioEnActividad(idSocio, idActividad);
         }
 
         public void DarBajaSocioActividad(Socio socio, Actividad actividad)

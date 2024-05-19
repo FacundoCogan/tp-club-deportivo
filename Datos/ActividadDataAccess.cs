@@ -11,7 +11,7 @@ namespace Datos
 
         public DataTable GetAllActividades()
         {
-            return GetAll("Activo = ?", new OleDbParameter("Activo", true));
+            return GetAll("Activo = TRUE");
         }
 
         public DataTable GetAllActividadesDetallado()
@@ -20,9 +20,27 @@ namespace Datos
                 "SELECT A.*, p.ID as ProfesorID, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, p.Especialidad " +
                 "FROM Actividades A " +
                 "INNER JOIN Profesores P ON A.ProfesorID = P.ID " +
-                "WHERE A.Activo = ?";
+                "WHERE A.Activo = TRUE";
 
-            return ExecuteQuery(query, new OleDbParameter("Activo", true));
+            return ExecuteQuery(query);
+        }
+
+        public DataTable GetAllActividadesDisponiblesSocio(int idSocio)
+        {
+            const string query =
+                "SELECT A.ID, A.Nombre " +
+                "FROM Actividades A " +
+                "LEFT JOIN SociosActividades SA ON A.ID = SA.ActividadID " +
+                "WHERE A.Activo = TRUE " +
+                "AND A.ID NOT IN ( " +
+                "    SELECT ActividadID " +
+                "    FROM SociosActividades " +
+                "    WHERE SocioID = ? " +
+                ") " +
+                "GROUP BY A.ID, A.Nombre, A.CupoMaximo " +
+                "HAVING (A.CupoMaximo - COUNT(SA.SocioID)) > 0";
+
+            return ExecuteQuery(query, new OleDbParameter("SocioID", idSocio));
         }
 
         public bool Insert(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,

@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ActividadesComboBox.cs" />
     <Compile Include="Forms\Actividades\ActividadesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +111,12 @@
     <Compile Include="Forms\Profesores\ProfesoresForm.Designer.cs">
       <DependentUpon>ProfesoresForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Socios\InscribirSocioActividadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Socios\InscribirSocioActividadForm.Designer.cs">
+      <DependentUpon>InscribirSocioActividadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Socios\SocioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Actividades\ActividadForm.resx">
       <DependentUpon>ActividadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Socios\InscribirSocioActividadForm.resx">
+      <DependentUpon>InscribirSocioActividadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Socios\SocioForm.resx">
       <DependentUpon>SocioForm.cs</DependentUpon>

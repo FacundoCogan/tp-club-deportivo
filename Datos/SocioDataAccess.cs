@@ -28,5 +28,18 @@ namespace Datos
         {
             return Update(id, dni, nombre, apellido, new OleDbParameter("CuotaSocial", cuotaSocial));
         }
+
+        public bool InscribirEnActividad(int idSocio, int idActividad)
+        {
+            OleDbParameter[] parameters =
+            {
+                new OleDbParameter("SocioID", idSocio),
+                new OleDbParameter("ActividadID", idActividad)
+            };
+
+            const string query = "INSERT INTO SociosActividades (SocioID, ActividadID) VALUES (?, ?)";
+
+            return ExecuteNonQuery(query, parameters) > 0;
+        }
     }
 }

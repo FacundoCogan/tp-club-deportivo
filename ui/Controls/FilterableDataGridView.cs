@@ -172,10 +172,14 @@ namespace UI.Controls
             }
         }
 
-        public void AddCustomButton(string buttonText, ActionHandler handler)
+        public void AddCustomButton(string buttonText, ActionHandler handler, bool enabled = true)
         {
             var buttonName = Guid.NewGuid().ToString();
-            _customButtons.Add(new ButtonDetails { Text = buttonText, Handler = handler, Name = buttonName });
+
+
+            _customButtons.Add(new ButtonDetails
+                { Text = buttonText, Name = buttonName, Enabled = enabled, Handler = handler });
+
             SetupDataGridView();
         }
 
@@ -286,8 +290,8 @@ namespace UI.Controls
 
         private class ButtonDetails
         {
-            public string Text { get; set; }
             public string Name { get; set; }
+            public string Text { get; set; }
             public ActionHandler Handler { get; set; }
         }
     }

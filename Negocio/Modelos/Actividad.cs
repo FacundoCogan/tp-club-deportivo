@@ -12,29 +12,33 @@ namespace Negocio.Modelos
             Costo = costo;
             CupoMaximo = cupoMaximo;
         }
+
         public Actividad(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
             Profesor profesor) : this(nombre, descripcion, diasHorarios, costo, cupoMaximo)
         {
             Profesor = profesor;
         }
 
-        // ------------------ Sobrecarga del constructor para que acepte el ID de la actividad ------------------
-        public Actividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo)
+        public Actividad(int id, string nombre)
         {
             ID = id;
             Nombre = nombre;
+        }
+
+        public Actividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
+            int cupoMaximo) : this(id, nombre)
+        {
             Descripcion = descripcion;
             DiasHorarios = diasHorarios;
             Costo = costo;
             CupoMaximo = cupoMaximo;
         }
+
         public Actividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
             Profesor profesor) : this(id, nombre, descripcion, diasHorarios, costo, cupoMaximo)
         {
             Profesor = profesor;
         }
-        // --------------------------------------------------------------------------------------------------------
-
 
         public int ID { get; set; }
         public string Nombre { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Datos
@@ -29,10 +30,14 @@ namespace Datos
 
             if (parameters != null)
             {
-                foreach (var parameter in parameters)
-                {
-                    command.Parameters.Add(parameter);
-                }
+                command.Parameters.AddRange(parameters);
+            }
+
+            Debug.WriteLine("Command Text: " + command.CommandText);
+
+            foreach (OleDbParameter parameter in command.Parameters)
+            {
+                Debug.WriteLine($"{parameter.ParameterName}: " + parameter.Value);
             }
 
             return command;
@@ -114,6 +119,11 @@ namespace Datos
             var query = $"SELECT * FROM {_tableName} WHERE {whereClause}";
 
             return ExecuteQuery(query, parameters);
+        }
+
+        public DataTable GetById(int id)
+        {
+            return GetBy("ID = ?", new OleDbParameter("ID", id));
         }
 
         protected bool Insert(params OleDbParameter[] parameters)

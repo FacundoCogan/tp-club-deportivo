@@ -29,6 +29,7 @@ namespace UI.Forms
                 DisplayProperties = new List<string> { "ID", "DNI", "Nombre", "Apellido", "CuotaSocial" }
             };
 
+            _filterableDataGridView.AddCustomButton("Inscribir", OnEnrollClicked);
             _filterableDataGridView.AddCustomButton("Generar orden", OnGeneratePaymentOrderClicked);
 
             _filterableDataGridView.EditClicked += OnEditClicked;
@@ -63,10 +64,22 @@ namespace UI.Forms
             }
         }
 
+        private void OnEnrollClicked(Socio socio)
+        {
+            var inscribirSocioForm = new InscribirSocioActividadForm(_club, socio);
+
+            inscribirSocioForm.ShowDialog();
+        }
+
         private void OnGeneratePaymentOrderClicked(Socio socio)
         {
             try
             {
+                if (MessageBox.Show("¿Está seguro que desea generar la orden de pago para este socio?",
+                        "Generar orden de pago",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+
                 _club.GenerarOrdenPagoSocio(socio);
 
                 MessageBox.Show("Orden de pago generada correctamente", "Orden de pago generada", MessageBoxButtons.OK,
