@@ -94,7 +94,11 @@ namespace Negocio.Modelos
         }
 
         public void GenerarOrdenesPagoSocios()
-        {
+        {   
+            foreach (var socio in Socios)
+            {
+                GenerarOrdenPagoSocio(socio);
+            }
         }
 
         public void RegistrarPagoSocio(Socio socio, OrdenPago ordenPago)

@@ -71,5 +71,26 @@ namespace UI
 
             actividadesForm.ShowDialog();
         }
+
+        private void generarParaTodosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("¿Está seguro que desea generar la orden de pago para todos los socios?",
+                        "Generar orden de pago",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+
+                _club.GenerarOrdenesPagoSocios();
+
+                MessageBox.Show("Ordenes de pago generadas correctamente", "Ordenes de pago generadas", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 }
