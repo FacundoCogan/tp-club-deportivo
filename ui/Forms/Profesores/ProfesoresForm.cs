@@ -28,10 +28,18 @@ namespace UI.Forms
                 DisplayProperties = new List<string> { "ID", "DNI", "Nombre", "Apellido", "Especialidad" }
             };
 
-            _filterableDataGridView.EditClicked += OnEditClicked;
-            _filterableDataGridView.DeleteClicked += OnDeleteClicked;
+            _filterableDataGridView.AddCustomButton("Ver actividades", OnViewActivitiesClicked);
+            _filterableDataGridView.AddEditButton(OnEditClicked);
+            _filterableDataGridView.AddDeleteButton(OnDeleteClicked);
 
             Controls.Add(_filterableDataGridView);
+        }
+
+        private void OnViewActivitiesClicked(Profesor profesor)
+        {
+            var actividadesProfesorForm = new ActividadesProfesorForm(_club, profesor);
+
+            actividadesProfesorForm.ShowDialog();
         }
 
         private void OnEditClicked(Profesor profesor)

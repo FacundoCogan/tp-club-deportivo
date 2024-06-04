@@ -35,6 +35,7 @@
             // 
             // confirmarButton
             // 
+            this.confirmarButton.Enabled = false;
             this.confirmarButton.Location = new System.Drawing.Point(154, 105);
             this.confirmarButton.Name = "confirmarButton";
             this.confirmarButton.Size = new System.Drawing.Size(121, 25);
@@ -54,12 +55,14 @@
             // 
             // actividadesComboBox
             // 
+            this.actividadesComboBox.DisplayMember = "Nombre";
             this.actividadesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.actividadesComboBox.FormattingEnabled = true;
             this.actividadesComboBox.Location = new System.Drawing.Point(69, 17);
             this.actividadesComboBox.Name = "actividadesComboBox";
             this.actividadesComboBox.Size = new System.Drawing.Size(206, 21);
             this.actividadesComboBox.TabIndex = 1;
+            this.actividadesComboBox.SelectedIndexChanged += new System.EventHandler(this.actividadesComboBox_SelectedIndexChanged);
             // 
             // InscribirSocioActividadForm
             // 

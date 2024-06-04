@@ -31,7 +31,7 @@ namespace Negocio
 
             if (cuotaSocial <= 0)
             {
-                throw new ArgumentException("The number must be greater than zero.");
+                throw new ArgumentException("La cuota social debe ser mayor a 0");
             }
 
             return cuotaSocial;

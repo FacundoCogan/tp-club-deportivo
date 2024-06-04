@@ -14,15 +14,33 @@ namespace Datos
             return GetAll("Activo = TRUE");
         }
 
+        public DataTable GetAllActividadesProfesor(int idProfesor)
+        {
+            return GetAll("ProfesorID = ? AND Activo = TRUE", new OleDbParameter("ProfesorID", idProfesor));
+        }
+
         public DataTable GetAllActividadesDetallado()
         {
             const string query =
-                "SELECT A.*, p.ID as ProfesorID, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, p.Especialidad " +
+                "SELECT A.*, P.ID as ProfesorID, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, P.Especialidad, " +
+                "A.CupoMaximo - (SELECT COUNT(*) FROM SociosActividades SA WHERE SA.ActividadID = A.ID) AS Disponibilidad " +
                 "FROM Actividades A " +
                 "INNER JOIN Profesores P ON A.ProfesorID = P.ID " +
                 "WHERE A.Activo = TRUE";
 
             return ExecuteQuery(query);
+        }
+
+        public DataTable GetAllActividadesSocio(int idSocio)
+        {
+            const string query =
+                "SELECT A.ID, A.Nombre, A.Descripcion, A.DiasHorarios, A.Costo " +
+                "FROM Actividades A " +
+                "INNER JOIN SociosActividades SA ON A.ID = SA.ActividadID " +
+                "WHERE A.Activo = TRUE " +
+                "AND SA.SocioID = ?";
+
+            return ExecuteQuery(query, new OleDbParameter("SocioID", idSocio));
         }
 
         public DataTable GetAllActividadesDisponiblesSocio(int idSocio)

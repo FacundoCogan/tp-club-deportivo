@@ -51,5 +51,16 @@ namespace Negocio.BLL
                             row.Field<string>("ProfesorNombre"),
                             row.Field<string>("ProfesorApellido"), row.Field<string>("Especialidad")))).ToList();
         }
+
+        public List<Actividad> GetActividadesProfesor(int profesorID)
+        {
+            var dataTable = _actividaDataAccess.GetAllActividadesProfesor(profesorID);
+
+            return (from DataRow row in dataTable.Rows
+                    select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"),
+                        row.Field<string>("Descripcion"),
+                        row.Field<string>("DiasHorarios"), row.Field<decimal>("Costo"), row.Field<int>("CupoMaximo")))
+                .ToList();
+        }
     }
 }

@@ -30,10 +30,10 @@ namespace UI.Forms
             };
 
             _filterableDataGridView.AddCustomButton("Inscribir", OnEnrollClicked);
+            _filterableDataGridView.AddCustomButton("Ver actividades", OnViewActivitiesClicked);
             _filterableDataGridView.AddCustomButton("Generar orden", OnGeneratePaymentOrderClicked);
-
-            _filterableDataGridView.EditClicked += OnEditClicked;
-            _filterableDataGridView.DeleteClicked += OnDeleteClicked;
+            _filterableDataGridView.AddEditButton(OnEditClicked);
+            _filterableDataGridView.AddDeleteButton(OnDeleteClicked);
 
             Controls.Add(_filterableDataGridView);
         }
@@ -69,6 +69,13 @@ namespace UI.Forms
             var inscribirSocioForm = new InscribirSocioActividadForm(_club, socio);
 
             inscribirSocioForm.ShowDialog();
+        }
+
+        private void OnViewActivitiesClicked(Socio socio)
+        {
+            var actividadesSocioForm = new ActividadesSocioForm(_club, socio);
+
+            actividadesSocioForm.ShowDialog();
         }
 
         private void OnGeneratePaymentOrderClicked(Socio socio)

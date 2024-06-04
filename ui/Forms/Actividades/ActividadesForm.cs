@@ -29,8 +29,8 @@ namespace UI.Forms
                     { "ID", "Nombre", "Descripcion", "DiasHorarios", "Costo", "CupoMaximo" }
             };
 
-            _filterableDataGridView.EditClicked += OnEditClicked;
-            _filterableDataGridView.DeleteClicked += OnDeleteClicked;
+            _filterableDataGridView.AddEditButton(OnEditClicked);
+            _filterableDataGridView.AddDeleteButton(OnDeleteClicked);
 
             Controls.Add(_filterableDataGridView);
         }
@@ -39,15 +39,26 @@ namespace UI.Forms
         {
             var editSocioForm = ActividadForm.CreateActividadForm(_club, actividad);
 
-            if (editSocioForm == null || editSocioForm.ShowDialog() != DialogResult.OK) return;
+            editSocioForm.ShowDialog();
         }
 
         private void OnDeleteClicked(Actividad actividad)
         {
-            if (MessageBox.Show("¿Está seguro que desea eliminar esta actividad?", "Eliminar actividad",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+            try
+            {
+                if (MessageBox.Show("¿Está seguro que desea eliminar esta actividad?", "Eliminar actividad",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            _club.EliminarActividad(actividad.ID);
+                _club.EliminarActividad(actividad.ID);
+
+                MessageBox.Show("Actividad eliminada correctamente", "Actividad eliminada", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("No se pudo eliminar la actividad", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

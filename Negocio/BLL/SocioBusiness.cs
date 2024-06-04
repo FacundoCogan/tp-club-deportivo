@@ -15,26 +15,30 @@ namespace Negocio.BLL
             return _socioDataAccess.Insert(socio.DNI, socio.Nombre, socio.Apellido, socio.CuotaSocial);
         }
 
+        private static Socio MapSocio(DataRow row)
+        {
+            return row.Field<decimal?>("CuotaSocial") != null
+                ? new SocioClub(
+                    row.Field<int>("ID"),
+                    row.Field<int>("DNI"),
+                    row.Field<string>("Nombre"),
+                    row.Field<string>("Apellido"),
+                    row.Field<decimal>("CuotaSocial"))
+                : (Socio)new SocioActividad(
+                    row.Field<int>("ID"),
+                    row.Field<int>("DNI"),
+                    row.Field<string>("Nombre"),
+                    row.Field<string>("Apellido"),
+                    row.Field<decimal>("CuotaSocial")
+                );
+        }
+
         public List<Socio> GetAllSocios()
         {
             var dataTable = _socioDataAccess.GetAllSocios();
 
-
             return (from DataRow row in dataTable.Rows
-                    select row.Field<decimal?>("CuotaSocial") != null
-                        ? new SocioClub(
-                            row.Field<int>("ID"),
-                            row.Field<int>("DNI"),
-                            row.Field<string>("Nombre"),
-                            row.Field<string>("Apellido"),
-                            row.Field<decimal>("CuotaSocial"))
-                        : (Socio)new SocioActividad(
-                            row.Field<int>("ID"),
-                            row.Field<int>("DNI"),
-                            row.Field<string>("Nombre"),
-                            row.Field<string>("Apellido"),
-                            row.Field<decimal>("CuotaSocial")
-                        )).ToList();
+                    select MapSocio(row)).ToList();
         }
 
         public bool Editar(Socio socio)

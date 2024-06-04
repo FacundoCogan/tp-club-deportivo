@@ -30,6 +30,7 @@ namespace UI.Forms
             diasHorariosTextBox.Text = actividad.DiasHorarios;
             costoTextBox.Text = actividad.Costo.ToString();
             cupoMaximoNumericUpDown.Value = actividad.CupoMaximo;
+            cupoMaximoNumericUpDown.Minimum = actividad.CupoMaximo;
             profesorComboBox.SelectedItem = actividad.Profesor;
         }
 

@@ -13,10 +13,11 @@ namespace UI.Forms
 
         public SocioForm(Club club, Socio socio = null)
         {
+            _club = club;
+
             InitializeComponent();
             CenterToParent();
 
-            _club = club;
 
             if (socio == null) return;
 

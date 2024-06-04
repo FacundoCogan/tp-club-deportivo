@@ -26,6 +26,11 @@ namespace Datos
 
         public bool Update(int id, int dni, string nombre, string apellido, string especialidad)
         {
+            if (ExistsOtherThan(id, new OleDbParameter("DNI", dni)))
+            {
+                throw new DuplicateNameException("Ya existe un profesor con ese DNI");
+            }
+
             return Update(id, dni, nombre, apellido, new OleDbParameter("Especialidad", especialidad));
         }
     }

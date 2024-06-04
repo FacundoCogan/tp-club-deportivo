@@ -47,5 +47,10 @@ namespace UI.Forms
                     MessageBoxIcon.Error);
             }
         }
+
+        private void actividadesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            confirmarButton.Enabled = actividadesComboBox.SelectedItem != null;
+        }
     }
 }

@@ -26,20 +26,12 @@ namespace Datos
 
         public bool Update(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
         {
-            return Update(id, dni, nombre, apellido, new OleDbParameter("CuotaSocial", cuotaSocial));
-        }
-
-        public bool InscribirEnActividad(int idSocio, int idActividad)
-        {
-            OleDbParameter[] parameters =
+            if (ExistsOtherThan(id, new OleDbParameter("DNI", dni)))
             {
-                new OleDbParameter("SocioID", idSocio),
-                new OleDbParameter("ActividadID", idActividad)
-            };
+                throw new DuplicateNameException("Ya existe un socio con ese DNI");
+            }
 
-            const string query = "INSERT INTO SociosActividades (SocioID, ActividadID) VALUES (?, ?)";
-
-            return ExecuteNonQuery(query, parameters) > 0;
+            return Update(id, dni, nombre, apellido, new OleDbParameter("CuotaSocial", cuotaSocial));
         }
     }
 }

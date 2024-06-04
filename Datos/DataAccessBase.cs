@@ -11,11 +11,11 @@ namespace Datos
         protected readonly string _connectionString =
             ConfigurationManager.ConnectionStrings["AccessConnectionString"].ConnectionString;
 
-        private readonly string _tableName;
+        protected readonly string TableName;
 
         protected DataAccessBase(string tableName)
         {
-            _tableName = tableName;
+            TableName = tableName;
         }
 
         protected OleDbConnection CreateConnection()
@@ -65,7 +65,7 @@ namespace Datos
 
         protected int ExecuteNonQuery(string query, params OleDbParameter[] parameters)
         {
-            var affectedRows = 0;
+            int affectedRows;
 
             using (var connection = CreateConnection())
             {
@@ -98,16 +98,27 @@ namespace Datos
         protected bool Exists(params OleDbParameter[] parameters)
         {
             var query =
-                $"SELECT COUNT(*) FROM {_tableName} WHERE {string.Join(" AND ", parameters.Select(p => $"{p.ParameterName} = ?"))}";
+                $"SELECT COUNT(*) FROM {TableName} WHERE {string.Join(" AND ", parameters.Select(p => $"{p.ParameterName} = ?"))}";
 
             var result = (int)ExecuteScalar(query, parameters);
 
             return result > 0;
         }
 
+        protected bool ExistsOtherThan(int id, params OleDbParameter[] parameters)
+        {
+            var query =
+                $"SELECT COUNT(*) FROM {TableName} WHERE {string.Join(" AND ", parameters.Select(p => $"{p.ParameterName} = ?"))} AND ID <> ?";
+
+            var allParameters = parameters.Concat(new[] { new OleDbParameter("ID", id) }).ToArray();
+            var result = (int)ExecuteScalar(query, allParameters);
+
+            return result > 0;
+        }
+
         protected DataTable GetAll(string whereClause = "", params OleDbParameter[] parameters)
         {
-            var query = $"SELECT * FROM {_tableName}";
+            var query = $"SELECT * FROM {TableName}";
 
             if (!string.IsNullOrEmpty(whereClause)) query += $" WHERE {whereClause}";
 
@@ -116,7 +127,7 @@ namespace Datos
 
         protected DataTable GetBy(string whereClause, params OleDbParameter[] parameters)
         {
-            var query = $"SELECT * FROM {_tableName} WHERE {whereClause}";
+            var query = $"SELECT * FROM {TableName} WHERE {whereClause}";
 
             return ExecuteQuery(query, parameters);
         }
@@ -129,7 +140,7 @@ namespace Datos
         protected bool Insert(params OleDbParameter[] parameters)
         {
             var query =
-                $"INSERT INTO {_tableName} ({string.Join(", ", parameters.Select(p => p.ParameterName))}) VALUES ({string.Join(", ", parameters.Select(p => "?"))})";
+                $"INSERT INTO {TableName} ({string.Join(", ", parameters.Select(p => p.ParameterName))}) VALUES ({string.Join(", ", parameters.Select(p => "?"))})";
 
             return ExecuteNonQuery(query, parameters) > 0;
         }
@@ -138,7 +149,7 @@ namespace Datos
             params OleDbParameter[] whereParameters)
         {
             var setClause = string.Join(", ", setParameters.Select(p => $"{p.ParameterName} = ?"));
-            var query = $"UPDATE {_tableName} SET {setClause} WHERE {whereClause}";
+            var query = $"UPDATE {TableName} SET {setClause} WHERE {whereClause}";
 
             var allParameters = setParameters.Concat(whereParameters).ToArray();
 
@@ -147,7 +158,7 @@ namespace Datos
 
         protected bool Delete(string whereClause, params OleDbParameter[] parameters)
         {
-            var query = $"UPDATE {_tableName} SET Activo = FALSE WHERE {whereClause}";
+            var query = $"UPDATE {TableName} SET Activo = FALSE WHERE {whereClause}";
 
             return ExecuteNonQuery(query, parameters) > 0;
         }

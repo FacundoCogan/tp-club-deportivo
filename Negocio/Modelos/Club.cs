@@ -25,36 +25,41 @@ namespace Negocio.Modelos
             return _inscripciones.GetActividadesDisponiblesSocio(idSocio);
         }
 
-        public void AgregarActividad(string nombre, string descripcion, string diasHorarios, decimal costo,
+        public bool AgregarActividad(string nombre, string descripcion, string diasHorarios, decimal costo,
             int cupoMaximo, int profesorID)
         {
-            _actividades.Agregar(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorID);
+            return _actividades.Agregar(new Actividad(nombre, descripcion, diasHorarios, costo, cupoMaximo),
+                profesorID);
         }
 
-
-        public void EditarActividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
+        public bool EditarActividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
             int cupoMaximo, int profesorID)
         {
-            _actividades.Editar(new Actividad(id, nombre, descripcion, diasHorarios, costo, cupoMaximo), profesorID);
+            return _actividades.Editar(new Actividad(id, nombre, descripcion, diasHorarios, costo, cupoMaximo),
+                profesorID);
         }
 
-        public void EliminarActividad(int ID)
+        public bool EliminarActividad(int idActividad)
         {
-            _actividades.Eliminar(ID);
+            _inscripciones.DarBajaActividad(idActividad);
+
+            return _actividades.Eliminar(idActividad);
         }
 
-        public void CrearSocio(int dni, string nombre, string apellido, decimal? cuotaSocial)
+        public bool CrearSocio(int dni, string nombre, string apellido, decimal? cuotaSocial)
         {
-            _socios.Agregar(new Socio(dni, nombre, apellido, cuotaSocial));
+            return _socios.Agregar(new Socio(dni, nombre, apellido, cuotaSocial));
         }
 
-        public void EditarSocio(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
+        public bool EditarSocio(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
         {
-            _socios.Editar(new Socio(id, dni, nombre, apellido, cuotaSocial));
+            return _socios.Editar(new Socio(id, dni, nombre, apellido, cuotaSocial));
         }
 
         public bool DarBajaSocio(int idSocio)
         {
+            _inscripciones.DarBajaSocio(idSocio);
+
             return _socios.Eliminar(idSocio);
         }
 
@@ -73,8 +78,14 @@ namespace Negocio.Modelos
             return _profesores.Eliminar(idProfesor);
         }
 
-        public void ConsultarActividades()
+        public List<Actividad> ConsultarActividadesSocio(int idSocio)
         {
+            return _inscripciones.GetActividadesSocio(idSocio);
+        }
+
+        public List<Actividad> ConsultarActividadesProfesor(int idProfesor)
+        {
+            return _actividades.GetActividadesProfesor(idProfesor);
         }
 
         public bool InscribirSocioActividad(int idSocio, int idActividad)
@@ -82,8 +93,9 @@ namespace Negocio.Modelos
             return _inscripciones.InscribirSocioEnActividad(idSocio, idActividad);
         }
 
-        public void DarBajaSocioActividad(Socio socio, Actividad actividad)
+        public bool DarBajaSocioActividad(int idSocio, int idActividad)
         {
+            return _inscripciones.DarBajaSocioActividad(idSocio, idActividad);
         }
 
         public bool GenerarOrdenPagoSocio(Socio socio)

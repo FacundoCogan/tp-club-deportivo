@@ -19,10 +19,5 @@ namespace Negocio.Modelos
 
         public string Especialidad { get; set; }
         public List<Actividad> Actividades { get; set; }
-
-
-        public void VerActividades()
-        {
-        }
     }
 }

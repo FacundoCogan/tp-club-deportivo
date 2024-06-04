@@ -48,9 +48,6 @@ namespace UI.Controls
             }
         }
 
-        public event ActionHandler EditClicked;
-        public event ActionHandler DeleteClicked;
-
         private void InitializeComponents()
         {
             _dataGridView = new DataGridView { Dock = DockStyle.Fill };
@@ -109,26 +106,6 @@ namespace UI.Controls
                 _dataGridView.Columns.Add(buttonColumn);
             }
 
-            // Add edit and delete button columns
-            var editButton = new DataGridViewButtonColumn
-            {
-                HeaderText = "",
-                Name = "Edit",
-                Text = "Editar",
-                UseColumnTextForButtonValue = true
-            };
-
-            var deleteButton = new DataGridViewButtonColumn
-            {
-                HeaderText = "",
-                Name = "Delete",
-                Text = "Eliminar",
-                UseColumnTextForButtonValue = true
-            };
-
-            _dataGridView.Columns.Add(editButton);
-            _dataGridView.Columns.Add(deleteButton);
-
             ApplyColumnFormatting();
         }
 
@@ -147,17 +124,6 @@ namespace UI.Controls
             {
                 _dataGridView.Columns[button.Name].DisplayIndex = dataIndex++;
             }
-
-            // Set the display indices for Edit and Delete buttons
-            if (_dataGridView.Columns.Contains("Edit"))
-            {
-                _dataGridView.Columns["Edit"].DisplayIndex = dataIndex++;
-            }
-
-            if (_dataGridView.Columns.Contains("Delete"))
-            {
-                _dataGridView.Columns["Delete"].DisplayIndex = dataIndex++;
-            }
         }
 
         private void ApplyColumnFormatting()
@@ -170,6 +136,16 @@ namespace UI.Controls
                 column.DefaultCellStyle.Format = "C2";
                 column.DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("es-AR");
             }
+        }
+
+        public void AddEditButton(ActionHandler handler, string text = "Editar")
+        {
+            AddCustomButton(text, handler);
+        }
+
+        public void AddDeleteButton(ActionHandler handler, string text = "Eliminar")
+        {
+            AddCustomButton(text, handler);
         }
 
         public void AddCustomButton(string buttonText, ActionHandler handler)
@@ -225,19 +201,9 @@ namespace UI.Controls
                          e.ColumnIndex == _dataGridView.Columns[button.Name].Index))
             {
                 button.Handler?.Invoke(entity);
+                RefreshDataSource();
                 return;
             }
-
-            if (e.ColumnIndex == _dataGridView.Columns["Edit"].Index)
-            {
-                EditClicked?.Invoke(entity);
-            }
-            else if (e.ColumnIndex == _dataGridView.Columns["Delete"].Index)
-            {
-                DeleteClicked?.Invoke(entity);
-            }
-
-            RefreshDataSource();
         }
 
         public void RefreshDataSource()

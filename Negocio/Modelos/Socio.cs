@@ -24,27 +24,9 @@ namespace Negocio.Modelos
         {
         }
 
-        public virtual void InscribirseActividad()
-        {
-        }
-
-        public virtual void DarBajaActividad()
-        {
-        }
-
         public virtual decimal CalcularMontoOrdenPago()
         {
             return 0;
-        }
-
-        public virtual void ConsultarActividades()
-        {
-        }
-
-        public virtual decimal ConsultarDeuda()
-        {
-            return 0;
-            // Default implementation
         }
     }
 }

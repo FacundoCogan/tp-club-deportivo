@@ -53,17 +53,5 @@ namespace Negocio.Modelos
         {
             return false;
         }
-
-        public void InscribirParticipante(Socio socio)
-        {
-        }
-
-        public void DarBajaParticipante(Socio socio)
-        {
-        }
-
-        public void VerParticipantes()
-        {
-        }
     }
 }
