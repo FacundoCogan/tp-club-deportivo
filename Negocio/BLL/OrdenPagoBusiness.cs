@@ -1,5 +1,9 @@
 ﻿using Datos;
 using Negocio.Modelos;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace Negocio.BLL
 {
@@ -10,6 +14,18 @@ namespace Negocio.BLL
         public bool Agregar(OrdenPago ordenPago)
         {
             return _ordenPagoDataAccess.Insert(ordenPago.SocioID, ordenPago.Monto);
+        }
+
+        public List<OrdenPago> GetOrdenesPendientes(int idSocio)
+        {
+            var dataTable = _ordenPagoDataAccess.GetOrdenesPendientes(idSocio);
+
+            return (from DataRow row in dataTable.Rows
+                    select new OrdenPago(
+                    row.Field<int>("ID"),
+                    row.Field<int>("SocioID"),
+                    row.Field<decimal>("Monto"),
+                    row.Field<DateTime>("Fecha"))).ToList();
         }
     }
 }

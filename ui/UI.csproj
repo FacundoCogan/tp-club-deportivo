@@ -123,6 +123,18 @@
     <Compile Include="Forms\Socios\InscribirSocioActividadForm.Designer.cs">
       <DependentUpon>InscribirSocioActividadForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Socios\PagoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Socios\PagoForm.Designer.cs">
+      <DependentUpon>PagoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Socios\SeleccionarOrdenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Socios\SeleccionarOrdenForm.Designer.cs">
+      <DependentUpon>SeleccionarOrdenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Socios\SocioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +146,11 @@
     </Compile>
     <Compile Include="Forms\Socios\ActividadesSocioForm.Designer.cs">
       <DependentUpon>ActividadesSocioForm.cs</DependentUpon>
+    <Compile Include="Forms\Socios\SociosSinPagarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Socios\SociosSinPagarForm.Designer.cs">
+      <DependentUpon>SociosSinPagarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -167,11 +184,22 @@
     <EmbeddedResource Include="Forms\Socios\InscribirSocioActividadForm.resx">
       <DependentUpon>InscribirSocioActividadForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Socios\PagoForm.resx">
+      <DependentUpon>PagoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Socios\SeleccionarOrdenForm.resx">
+      <DependentUpon>SeleccionarOrdenForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Socios\SocioForm.resx">
       <DependentUpon>SocioForm.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Forms\Socios\ActividadesSocioForm.resx">
       <DependentUpon>ActividadesSocioForm.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Forms\Socios\SociosSinPagarForm.resx">
+      <DependentUpon>SociosSinPagarForm.cs</DependentUpon>
+>>>>>>> 70a551b (Registrar pago y validaciones)
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

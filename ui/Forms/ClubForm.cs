@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Negocio.Modelos;
 using UI.Forms;
+using UI.Forms.Socios;
 
 namespace UI
 {
@@ -92,5 +93,13 @@ namespace UI
                     MessageBoxIcon.Error);
             }
         }
+
+        private void registrarPagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sociosSinPagar = new SociosSinPagarForm(_club);
+
+            sociosSinPagar.ShowDialog();
+        }
+
     }
 }

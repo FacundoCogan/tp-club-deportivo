@@ -10,8 +10,11 @@ namespace Negocio.Modelos
         private readonly OrdenPagoBusiness _ordenPago = new OrdenPagoBusiness();
         private readonly ProfesorBusiness _profesores = new ProfesorBusiness();
         private readonly SocioBusiness _socios = new SocioBusiness();
+        private readonly SocioBusiness _sociosSinPagar = new SocioBusiness();
+        private readonly OrdenPagoBusiness _ordenesPendientes = new OrdenPagoBusiness();
 
         public List<Socio> Socios => _socios.GetAllSocios();
+        public List<Socio> SociosSinPagar => _sociosSinPagar.GetSociosSinPagar();
 
         public List<Profesor> Profesores => _profesores.GetAllProfesores();
 
@@ -19,6 +22,10 @@ namespace Negocio.Modelos
         public List<Actividad> Actividades => _actividades.GetAllActividadesBasico();
         public List<Actividad> ActividadesDetallado => _actividades.GetAllActividadesDetallado();
 
+        public List <OrdenPago> GetOrdenesPendientes(int idSocio)
+        {
+            return _ordenesPendientes.GetOrdenesPendientes(idSocio);
+        }
 
         public List<Actividad> GetActividadesDisponiblesSocio(int idSocio)
         {
@@ -113,8 +120,9 @@ namespace Negocio.Modelos
             }
         }
 
-        public void RegistrarPagoSocio(Socio socio, OrdenPago ordenPago)
+        public void RegistrarPagoSocio(OrdenPago ordenPago)
         {
+            _socios.Pagar(ordenPago);
         }
     }
 }

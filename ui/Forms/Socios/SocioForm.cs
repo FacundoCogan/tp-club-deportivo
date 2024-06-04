@@ -65,6 +65,7 @@ namespace UI.Forms
 
                     MessageBox.Show("Socio editado correctamente", "Socio Editado", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+
                 }
 
                 DialogResult = DialogResult.OK;

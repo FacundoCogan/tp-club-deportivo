@@ -16,6 +16,13 @@ namespace Negocio.Modelos
             Pagada = pagada;
         }
 
+        // Constructor generado para poder hacer la lista de ordenes de pago pendientes
+        public OrdenPago(int id, int socioID, decimal monto, DateTime fecha) : this(socioID, monto)
+        {
+            ID = id;
+            Fecha = fecha;
+        }
+
         public OrdenPago(int id, int socioID, decimal monto, DateTime fecha, bool pagada)
         {
             ID = id;

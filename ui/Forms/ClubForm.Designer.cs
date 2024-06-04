@@ -44,6 +44,7 @@ namespace UI
             this.ordenDePagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarParaTodosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clubBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.registrarPagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clubBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +66,8 @@ namespace UI
             // 
             this.sociosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verSociosToolStripMenuItem,
-            this.nuevoToolStripMenuItem});
+            this.nuevoToolStripMenuItem,
+            this.registrarPagoToolStripMenuItem});
             this.sociosToolStripMenuItem.Name = "sociosToolStripMenuItem";
             this.sociosToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.sociosToolStripMenuItem.Text = "Socios";
@@ -73,14 +75,14 @@ namespace UI
             // verSociosToolStripMenuItem
             // 
             this.verSociosToolStripMenuItem.Name = "verSociosToolStripMenuItem";
-            this.verSociosToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.verSociosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verSociosToolStripMenuItem.Text = "Ver listado";
             this.verSociosToolStripMenuItem.Click += new System.EventHandler(this.verSociosToolStripMenuItem_Click);
             // 
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.CrearSocio);
             // 
@@ -141,9 +143,16 @@ namespace UI
             // generarParaTodosToolStripMenuItem
             // 
             this.generarParaTodosToolStripMenuItem.Name = "generarParaTodosToolStripMenuItem";
-            this.generarParaTodosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generarParaTodosToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.generarParaTodosToolStripMenuItem.Text = "Generar todas";
             this.generarParaTodosToolStripMenuItem.Click += new System.EventHandler(this.generarParaTodosToolStripMenuItem_Click);
+            // 
+            // registrarPagoToolStripMenuItem
+            // 
+            this.registrarPagoToolStripMenuItem.Name = "registrarPagoToolStripMenuItem";
+            this.registrarPagoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrarPagoToolStripMenuItem.Text = "Registrar pago";
+            this.registrarPagoToolStripMenuItem.Click += new System.EventHandler(this.registrarPagoToolStripMenuItem_Click);
             // 
             // ClubForm
             // 
@@ -177,6 +186,7 @@ namespace UI
         private System.Windows.Forms.ToolStripMenuItem verActividadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenDePagoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarParaTodosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registrarPagoToolStripMenuItem;
     }
 }
 

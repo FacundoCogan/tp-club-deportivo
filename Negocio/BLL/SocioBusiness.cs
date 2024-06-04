@@ -32,6 +32,19 @@ namespace Negocio.BLL
                     row.Field<decimal>("CuotaSocial")
                 );
         }
+        
+        public List<Socio> GetSociosSinPagar()
+        {
+            var dataTable = _socioDataAccess.GetSociosSinPagar();
+
+            return (from DataRow row in dataTable.Rows
+                                       select new Socio(
+                                       row.Field<int>("ID"),
+                                       row.Field<int>("DNI"),
+                                       row.Field<string>("Nombre"),
+                                       row.Field<string>("Apellido"),
+                                       row.Field<decimal>("CuotaSocial"))).ToList();
+        }
 
         public List<Socio> GetAllSocios()
         {
@@ -39,6 +52,11 @@ namespace Negocio.BLL
 
             return (from DataRow row in dataTable.Rows
                     select MapSocio(row)).ToList();
+        }
+
+        public bool Pagar(OrdenPago ordenPago)
+        {
+            return _socioDataAccess.Pagar(ordenPago.ID, ordenPago.SocioID);
         }
 
         public bool Editar(Socio socio)
