@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Forms\Socios\ActividadesSocioForm.Designer.cs">
       <DependentUpon>ActividadesSocioForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Socios\SociosSinPagarForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,13 +194,11 @@
     <EmbeddedResource Include="Forms\Socios\SocioForm.resx">
       <DependentUpon>SocioForm.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Forms\Socios\ActividadesSocioForm.resx">
       <DependentUpon>ActividadesSocioForm.cs</DependentUpon>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Socios\SociosSinPagarForm.resx">
       <DependentUpon>SociosSinPagarForm.cs</DependentUpon>
->>>>>>> 70a551b (Registrar pago y validaciones)
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
