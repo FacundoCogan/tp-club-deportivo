@@ -75,6 +75,14 @@ namespace UI
 
         private void generarParaTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            if (_club.SociosSinOrden.Count == 0)
+            {
+                MessageBox.Show("Ya se le ha generado una orden de pago a todos los socios en el corriente mes.", "Error", MessageBoxButtons.OK,
+                                       MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 if (MessageBox.Show("¿Está seguro que desea generar la orden de pago para todos los socios?",
@@ -96,6 +104,13 @@ namespace UI
 
         private void registrarPagoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_club.SociosSinPagar.Count == 0)
+            {
+                MessageBox.Show("Todos los socios tienen el pago al día.", "Error", MessageBoxButtons.OK,
+                                       MessageBoxIcon.Error);
+                return;
+            }
+
             var sociosSinPagar = new SociosSinPagarForm(_club);
 
             sociosSinPagar.ShowDialog();

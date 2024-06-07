@@ -123,12 +123,6 @@
     <Compile Include="Forms\Socios\InscribirSocioActividadForm.Designer.cs">
       <DependentUpon>InscribirSocioActividadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Socios\PagoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Socios\PagoForm.Designer.cs">
-      <DependentUpon>PagoForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Socios\SeleccionarOrdenForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,9 +178,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Socios\InscribirSocioActividadForm.resx">
       <DependentUpon>InscribirSocioActividadForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Socios\PagoForm.resx">
-      <DependentUpon>PagoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Socios\SeleccionarOrdenForm.resx">
       <DependentUpon>SeleccionarOrdenForm.cs</DependentUpon>

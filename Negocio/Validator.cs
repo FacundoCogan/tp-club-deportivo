@@ -21,8 +21,10 @@ namespace Negocio
 
         public static decimal? ValidateCuotaSocial(string value)
         {
-            if (value == null)
+            if (string.IsNullOrWhiteSpace(value))
+            {
                 return null;
+            }
 
             if (!decimal.TryParse(value, out var cuotaSocial))
             {

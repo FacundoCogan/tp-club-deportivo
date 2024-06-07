@@ -32,18 +32,31 @@ namespace Negocio.BLL
                     row.Field<decimal>("CuotaSocial")
                 );
         }
+
+        private static Socio SocioComun(DataRow row)
+        {
+            return new Socio(
+            row.Field<int>("ID"),
+            row.Field<int>("DNI"),
+            row.Field<string>("Nombre"),
+            row.Field<string>("Apellido"),
+            row.Field<decimal>("CuotaSocial"));
+        }
         
         public List<Socio> GetSociosSinPagar()
         {
             var dataTable = _socioDataAccess.GetSociosSinPagar();
 
             return (from DataRow row in dataTable.Rows
-                                       select new Socio(
-                                       row.Field<int>("ID"),
-                                       row.Field<int>("DNI"),
-                                       row.Field<string>("Nombre"),
-                                       row.Field<string>("Apellido"),
-                                       row.Field<decimal>("CuotaSocial"))).ToList();
+                    select SocioComun(row)).ToList();
+        }
+
+        public List<Socio> GetSociosSinOrden()
+        {
+            var dataTable = _socioDataAccess.GetSociosSinOrden();
+
+            return (from DataRow row in dataTable.Rows
+                    select SocioComun(row)).ToList();
         }
 
         public List<Socio> GetAllSocios()

@@ -23,7 +23,6 @@ namespace Datos
             return ExecuteQuery(query, new OleDbParameter("SocioID", idSocio));
         }
 
-
         public bool Insert(int idSocio, decimal monto)
         {
             // Verificar si ya existe una orden de pago para el mismo cliente en el mismo mes y año

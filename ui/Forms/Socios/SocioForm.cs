@@ -43,7 +43,7 @@ namespace UI.Forms
             try
             {
                 if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Apellido) ||
-                    string.IsNullOrWhiteSpace(DNI) || string.IsNullOrWhiteSpace(CuotaSocial))
+                    string.IsNullOrWhiteSpace(DNI))
                 {
                     throw new Exception("Debe completar todos los campos");
                 }
@@ -51,7 +51,7 @@ namespace UI.Forms
                 var dni = Validator.ValidateDNI(DNI);
 
                 var cuotaSocial = Validator.ValidateCuotaSocial(CuotaSocial);
-
+                    
                 if (CurrentMode == FormMode.Create)
                 {
                     _club.CrearSocio(dni, Nombre, Apellido, cuotaSocial);

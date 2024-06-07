@@ -10,8 +10,8 @@ namespace Datos
         {
         }
 
-        //int currentMonth = DateTime.Now.Month;
-        //int currentYear = DateTime.Now.Year;
+        int currentMonth = DateTime.Now.Month;
+        int currentYear = DateTime.Now.Year;
 
         public DataTable GetAllSocios()
         {
@@ -29,6 +29,13 @@ namespace Datos
             string query = $"SELECT * FROM Socios WHERE ID IN (SELECT SocioID FROM OrdenesPago WHERE Pagada = FALSE)";
 
             return ExecuteQuery(query /*parameters*/);
+        }
+
+        public DataTable GetSociosSinOrden()
+        {
+            string query = $"SELECT * FROM Socios WHERE ID NOT IN (SELECT SocioID FROM OrdenesPago WHERE MONTH(Fecha) = {currentMonth} AND YEAR(Fecha) = {currentYear})";
+
+            return ExecuteQuery(query);
         }
 
         public bool Pagar(int idOrdenPago, int socioID)

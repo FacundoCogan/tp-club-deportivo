@@ -1,4 +1,5 @@
 ﻿using Negocio.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Controls;
@@ -37,11 +38,21 @@ namespace UI.Forms.Socios
 
         private void OnRegisterPaymentClicked(OrdenPago ordenPago)
         {
-            var pagoForm = new PagoForm(_club, ordenPago);
+            if (MessageBox.Show("¿Está seguro que desea registrar este pago?", "Registrar pago",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            pagoForm.ShowDialog();
+            try
+            {
+                _club.RegistrarPagoSocio(ordenPago);
 
-            _filterableDataGridView.RefreshDataSource();
+                MessageBox.Show("Pago registrado correctamente", "Pago registrado", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            }
         }
     }
 }
