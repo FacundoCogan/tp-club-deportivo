@@ -17,32 +17,32 @@ namespace Negocio.BLL
 
         private static Socio MapSocio(DataRow row)
         {
-            return row.Field<decimal?>("CuotaSocial") != null
+            var cuotaSocial = row.IsNull("CuotaSocial") ? null : row.Field<decimal?>("CuotaSocial");
+
+            return cuotaSocial != null
                 ? new SocioClub(
                     row.Field<int>("ID"),
                     row.Field<int>("DNI"),
                     row.Field<string>("Nombre"),
                     row.Field<string>("Apellido"),
-                    row.Field<decimal>("CuotaSocial"))
+                    cuotaSocial)
                 : (Socio)new SocioActividad(
                     row.Field<int>("ID"),
                     row.Field<int>("DNI"),
                     row.Field<string>("Nombre"),
-                    row.Field<string>("Apellido"),
-                    row.Field<decimal>("CuotaSocial")
-                );
+                    row.Field<string>("Apellido"));
         }
 
         private static Socio SocioComun(DataRow row)
         {
             return new Socio(
-            row.Field<int>("ID"),
-            row.Field<int>("DNI"),
-            row.Field<string>("Nombre"),
-            row.Field<string>("Apellido"),
-            row.Field<decimal>("CuotaSocial"));
+                row.Field<int>("ID"),
+                row.Field<int>("DNI"),
+                row.Field<string>("Nombre"),
+                row.Field<string>("Apellido"),
+                row.Field<decimal?>("CuotaSocial"));
         }
-        
+
         public List<Socio> GetSociosSinPagar()
         {
             var dataTable = _socioDataAccess.GetSociosSinPagar();

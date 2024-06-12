@@ -10,9 +10,6 @@ namespace Datos
         {
         }
 
-        int currentMonth = DateTime.Now.Month;
-        int currentYear = DateTime.Now.Year;
-
         public DataTable GetAllSocios()
         {
             return GetAll();
@@ -20,30 +17,24 @@ namespace Datos
 
         public DataTable GetSociosSinPagar()
         {
-            //OleDbParameter[] parameters =
-            //{
-            //    new OleDbParameter("currentMonth", currentMonth),
-            //    new OleDbParameter("currentYear", currentYear)
-            //};
-
-            string query = $"SELECT * FROM Socios WHERE ID IN (SELECT SocioID FROM OrdenesPago WHERE Pagada = FALSE)";
-
-            return ExecuteQuery(query /*parameters*/);
+            return ExecuteQuery(
+                "SELECT * FROM Socios WHERE ID IN (SELECT SocioID FROM OrdenesPago WHERE Pagada = FALSE)");
         }
 
         public DataTable GetSociosSinOrden()
         {
-            string query = $"SELECT * FROM Socios WHERE ID NOT IN (SELECT SocioID FROM OrdenesPago WHERE MONTH(Fecha) = {currentMonth} AND YEAR(Fecha) = {currentYear})";
+            var query =
+                $"SELECT * FROM Socios WHERE ID NOT IN (SELECT SocioID FROM OrdenesPago WHERE MONTH(Fecha) = {DateTime.Now.Month} AND YEAR(Fecha) = {DateTime.Now.Year})";
 
             return ExecuteQuery(query);
         }
 
-        public bool Pagar(int idOrdenPago, int socioID)
+        public bool Pagar(int idOrdenPago, int idSocio)
         {
             OleDbParameter[] parameters =
             {
                 new OleDbParameter("ID", idOrdenPago),
-                new OleDbParameter("SocioID", socioID)
+                new OleDbParameter("SocioID", idSocio)
             };
 
             const string query = "UPDATE OrdenesPago SET Pagada = TRUE WHERE ID = ? AND SocioID = ?";
@@ -58,7 +49,12 @@ namespace Datos
                 throw new DuplicateNameException("Ya existe un socio con ese DNI");
             }
 
-            return Insert(dni, nombre, apellido, new OleDbParameter("CuotaSocial", cuotaSocial));
+            var cuotaSocialParameter = new OleDbParameter("CuotaSocial", OleDbType.Decimal)
+            {
+                Value = cuotaSocial.HasValue ? (object)cuotaSocial.Value : DBNull.Value
+            };
+
+            return Insert(dni, nombre, apellido, cuotaSocialParameter);
         }
 
         public bool Update(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)

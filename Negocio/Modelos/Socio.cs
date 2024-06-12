@@ -4,12 +4,13 @@ namespace Negocio.Modelos
 {
     public class Socio : Persona
     {
-        public Socio(int dni, string nombre, string apellido, decimal? cuotaSocial) : base(dni, nombre, apellido)
+        public Socio(int dni, string nombre, string apellido, decimal? cuotaSocial = null) : base(dni, nombre, apellido)
         {
             CuotaSocial = cuotaSocial;
         }
 
-        public Socio(int id, int dni, string nombre, string apellido, decimal? cuotaSocial) : base(id, dni, nombre,
+        public Socio(int id, int dni, string nombre, string apellido, decimal? cuotaSocial = null) : base(id, dni,
+            nombre,
             apellido)
         {
             CuotaSocial = cuotaSocial;
@@ -21,7 +22,6 @@ namespace Negocio.Modelos
 
         public virtual void Pagar(OrdenPago ordenPago)
         {
-
         }
 
         public virtual decimal CalcularMontoOrdenPago()

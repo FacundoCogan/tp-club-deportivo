@@ -5,14 +5,14 @@ namespace Negocio.Modelos
 {
     public class SocioClub : Socio
     {
-        public SocioClub(int dni, string nombre, string apellido, decimal? cuotaSocial)
+        public SocioClub(int dni, string nombre, string apellido, decimal? cuotaSocial = null)
             : base(dni, nombre, apellido, cuotaSocial)
         {
             CuotaSocial = cuotaSocial;
             MaxCantidadActividadesLibres = 5;
         }
 
-        public SocioClub(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)
+        public SocioClub(int id, int dni, string nombre, string apellido, decimal? cuotaSocial = null)
             : this(dni, nombre, apellido, cuotaSocial)
         {
             ID = id;
