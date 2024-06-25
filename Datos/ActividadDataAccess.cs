@@ -11,24 +11,26 @@ namespace Datos
 
         public DataTable GetAllActividades()
         {
-            return GetAll("Activo = TRUE");
+            const string query =
+                "SELECT " +
+                "A.ID, " +
+                "A.Nombre, " +
+                "A.Descripcion, " +
+                "A.DiasHorarios, " +
+                "A.Costo, " +
+                "A.CupoMaximo,  " +
+                "A.ProfesorID,  " +
+                "A.Activo, " +
+                "(A.CupoMaximo - (SELECT COUNT(*) FROM SociosActividades SA WHERE SA.ActividadID = A.ID)) AS Disponibilidad " +
+                "FROM Actividades A " +
+                "WHERE Activo = True";
+
+            return ExecuteQuery(query);
         }
 
         public DataTable GetAllActividadesProfesor(int idProfesor)
         {
             return GetAll("ProfesorID = ? AND Activo = TRUE", new OleDbParameter("ProfesorID", idProfesor));
-        }
-
-        public DataTable GetAllActividadesDetallado()
-        {
-            const string query =
-                "SELECT A.*, P.ID as ProfesorID, P.Nombre AS ProfesorNombre, P.Apellido AS ProfesorApellido, P.Especialidad, " +
-                "A.CupoMaximo - (SELECT COUNT(*) FROM SociosActividades SA WHERE SA.ActividadID = A.ID) AS Disponibilidad " +
-                "FROM Actividades A " +
-                "INNER JOIN Profesores P ON A.ProfesorID = P.ID " +
-                "WHERE A.Activo = TRUE";
-
-            return ExecuteQuery(query);
         }
 
         public DataTable GetAllActividadesSocio(int idSocio)
@@ -61,8 +63,19 @@ namespace Datos
             return ExecuteQuery(query, new OleDbParameter("SocioID", idSocio));
         }
 
+        public DataTable GetAllParticipantesActividad(int idActividad)
+        {
+            const string query =
+                "SELECT S.ID, S.DNI, S.Nombre, S.Apellido, S.CuotaSocial " +
+                "FROM Socios S " +
+                "INNER JOIN SociosActividades SA ON S.ID = SA.SocioID " +
+                "WHERE SA.ActividadID = ?";
+
+            return ExecuteQuery(query, new OleDbParameter("ActividadID", idActividad));
+        }
+
         public bool Insert(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
-            int profesorID)
+            int idProfesor)
         {
             OleDbParameter[] parameters =
             {
@@ -71,7 +84,7 @@ namespace Datos
                 new OleDbParameter("DiasHorarios", diasHorarios),
                 new OleDbParameter("Costo", costo),
                 new OleDbParameter("CupoMaximo", cupoMaximo),
-                new OleDbParameter("ProfesorID", profesorID)
+                new OleDbParameter("ProfesorID", idProfesor)
             };
 
             return Insert(parameters);

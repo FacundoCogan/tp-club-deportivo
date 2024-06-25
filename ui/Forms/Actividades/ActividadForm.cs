@@ -15,7 +15,7 @@ namespace UI.Forms
             _club = club;
 
             InitializeComponent();
-            CenterToScreen();
+            CenterToParent();
 
             profesorComboBox.DataSource = _club.Profesores;
             profesorComboBox.DisplayMember = "NombreCompleto";

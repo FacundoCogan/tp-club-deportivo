@@ -83,6 +83,12 @@
     <Compile Include="Forms\Actividades\ActividadesForm.Designer.cs">
       <DependentUpon>ActividadesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Actividades\VerParticipantesActividadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Actividades\VerParticipantesActividadForm.Designer.cs">
+      <DependentUpon>VerParticipantesActividadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ClubForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Actividades\ActividadesForm.resx">
       <DependentUpon>ActividadesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Actividades\VerParticipantesActividadForm.resx">
+      <DependentUpon>VerParticipantesActividadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Profesores\ActividadesProfesorForm.resx">
       <DependentUpon>ActividadesProfesorForm.cs</DependentUpon>

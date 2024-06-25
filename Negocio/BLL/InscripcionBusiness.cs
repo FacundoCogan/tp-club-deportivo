@@ -13,6 +13,16 @@ namespace Negocio.BLL
         private readonly InscripcionDataAccess _inscripcionDataAccess = new InscripcionDataAccess();
         private readonly SocioDataAccess _socioDataAccess = new SocioDataAccess();
 
+        public List<Socio> GetParticipantesActividad(int actividadId)
+        {
+            var dataTable = _actividadDataAccess.GetAllParticipantesActividad(actividadId);
+
+            return (from DataRow row in dataTable.Rows
+                    select new Socio(row.Field<int>("ID"), row.Field<int>("DNI"), row.Field<string>("Nombre"),
+                        row.Field<string>("Apellido")))
+                .ToList();
+        }
+
         public List<Actividad> GetActividadesSocio(int idSocio)
         {
             var dataTable = _actividadDataAccess.GetAllActividadesSocio(idSocio);

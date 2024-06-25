@@ -30,13 +30,6 @@ namespace Negocio.BLL
                         row.Field<string>("Apellido"), row.Field<string>("Especialidad"))).ToList();
         }
 
-        //public List<Profesor> GetAllProfesoresDetallado()
-        //{
-        //    var dataTable = _profesorDataAccess.GetAllProfesoresDetallado();
-
-        //    return (from DataRow row in dataTable.Rows select new Profesor(row.Field<int>("DNI"), row.Field<string>("Nombre"), row.Field<string>("Apellido"), row.Field<string>("Especialidad"), row.Field<string>("Actividades"))).ToList();
-        //}
-
         public bool Eliminar(int id)
         {
             return _profesorDataAccess.Delete(id);

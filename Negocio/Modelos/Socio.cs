@@ -17,12 +17,7 @@ namespace Negocio.Modelos
         }
 
         public List<Actividad> Actividades { get; set; } = new List<Actividad>();
-        public List<OrdenPago> OrdenesPago { get; set; } = new List<OrdenPago>();
         public decimal? CuotaSocial { get; set; }
-
-        public virtual void Pagar(OrdenPago ordenPago)
-        {
-        }
 
         public virtual decimal CalcularMontoOrdenPago()
         {

@@ -10,24 +10,11 @@ namespace UI
     {
         private readonly Club _club = new Club();
 
-
         public ClubForm()
         {
             InitializeComponent();
-            CenterToScreen();
+            CenterToParent();
         }
-
-
-        public void ActualizarActividadesListView()
-        {
-            //actividadesListView.Items.Clear();
-
-            //foreach (var item in _club.Socios.Select(socio => new ListViewItem(new[] { socio.DNI.ToString(), socio.Nombre, socio.Apellido, socio.CuotaSocial.ToString(CultureInfo.CurrentCulture) })))
-            //{
-            //    sociosListView.Items.Add(item);
-            //}
-        }
-
 
         private void CrearSocio(object sender, EventArgs e)
         {
@@ -40,9 +27,7 @@ namespace UI
         {
             var actividadForm = ActividadForm.CreateActividadForm(_club);
 
-            if (actividadForm == null || actividadForm.ShowDialog() != DialogResult.OK) return;
-
-            ActualizarActividadesListView();
+            actividadForm.ShowDialog();
         }
 
         private void verSociosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,11 +60,11 @@ namespace UI
 
         private void generarParaTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (_club.SociosSinOrden.Count == 0)
             {
-                MessageBox.Show("Ya se le ha generado una orden de pago a todos los socios en el corriente mes.", "Error", MessageBoxButtons.OK,
-                                       MessageBoxIcon.Error);
+                MessageBox.Show("Ya se le ha generado una orden de pago a todos los socios en el corriente mes.",
+                    "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -92,7 +77,8 @@ namespace UI
 
                 _club.GenerarOrdenesPagoSocios();
 
-                MessageBox.Show("Ordenes de pago generadas correctamente", "Ordenes de pago generadas", MessageBoxButtons.OK,
+                MessageBox.Show("Ordenes de pago generadas correctamente", "Ordenes de pago generadas",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -107,7 +93,7 @@ namespace UI
             if (_club.SociosSinPagar.Count == 0)
             {
                 MessageBox.Show("Todos los socios tienen el pago al día.", "Error", MessageBoxButtons.OK,
-                                       MessageBoxIcon.Error);
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -116,5 +102,12 @@ namespace UI
             sociosSinPagar.ShowDialog();
         }
 
+        private void ClubForm_Load(object sender, EventArgs e)
+        {
+            labelSocios.Text = _club.Socios.Count.ToString();
+            labelActividades.Text = _club.Actividades.Count.ToString();
+            labelProfesores.Text = _club.Profesores.Count.ToString();
+            labelOrdenes.Text = _club.OrdenesImpagas.ToString();
+        }
     }
 }

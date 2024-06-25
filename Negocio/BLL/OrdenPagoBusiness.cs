@@ -1,9 +1,9 @@
-﻿using Datos;
-using Negocio.Modelos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Datos;
+using Negocio.Modelos;
 
 namespace Negocio.BLL
 {
@@ -22,10 +22,15 @@ namespace Negocio.BLL
 
             return (from DataRow row in dataTable.Rows
                     select new OrdenPago(
-                    row.Field<int>("ID"),
-                    row.Field<int>("SocioID"),
-                    row.Field<decimal>("Monto"),
-                    row.Field<DateTime>("Fecha"))).ToList();
+                        row.Field<int>("ID"),
+                        row.Field<int>("SocioID"),
+                        row.Field<decimal>("Monto"),
+                        row.Field<DateTime>("Fecha"))).ToList();
+        }
+
+        public int GetOrdenesImpagas()
+        {
+            return _ordenPagoDataAccess.GetOrdenesImpagas();
         }
     }
 }

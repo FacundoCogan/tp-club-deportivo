@@ -26,13 +26,21 @@ namespace UI.Forms
                 Dock = DockStyle.Fill,
                 DataFetcher = () => _club.Actividades,
                 DisplayProperties = new List<string>
-                    { "ID", "Nombre", "Descripcion", "DiasHorarios", "Costo", "CupoMaximo" }
+                    { "ID", "Nombre", "Descripcion", "DiasHorarios", "Costo", "CupoMaximo", "Disponibilidad" }
             };
 
+            _filterableDataGridView.AddCustomButton("Ver participantes", OnViewParticipantsClicked);
             _filterableDataGridView.AddEditButton(OnEditClicked);
             _filterableDataGridView.AddDeleteButton(OnDeleteClicked);
 
             Controls.Add(_filterableDataGridView);
+        }
+
+        private void OnViewParticipantsClicked(Actividad actividad)
+        {
+            var viewParticipantsForm = new VerParticipantesActividadForm(_club, actividad);
+
+            viewParticipantsForm.ShowDialog();
         }
 
         private void OnEditClicked(Actividad actividad)

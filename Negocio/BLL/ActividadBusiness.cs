@@ -28,28 +28,16 @@ namespace Negocio.BLL
             return _actividaDataAccess.Delete(ID);
         }
 
-        public List<Actividad> GetAllActividadesBasico()
+        public List<Actividad> GetAllActividades()
         {
             var dataTable = _actividaDataAccess.GetAllActividades();
 
             return (from DataRow row in dataTable.Rows
                     select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"),
                         row.Field<string>("Descripcion"),
-                        row.Field<string>("DiasHorarios"), row.Field<decimal>("Costo"), row.Field<int>("CupoMaximo")))
-                .ToList();
-        }
-
-        public List<Actividad> GetAllActividadesDetallado()
-        {
-            var dataTable = _actividaDataAccess.GetAllActividadesDetallado();
-
-            return (from DataRow row in dataTable.Rows
-                    select new Actividad(row.Field<int>("ID"), row.Field<string>("Nombre"),
-                        row.Field<string>("Descripcion"),
                         row.Field<string>("DiasHorarios"), row.Field<decimal>("Costo"), row.Field<int>("CupoMaximo"),
-                        new Profesor(row.Field<int>("ProfesorID"), row.Field<int>("ProfesorDNI"),
-                            row.Field<string>("ProfesorNombre"),
-                            row.Field<string>("ProfesorApellido"), row.Field<string>("Especialidad")))).ToList();
+                        row.Field<int>("Disponibilidad")))
+                .ToList();
         }
 
         public List<Actividad> GetActividadesProfesor(int profesorID)

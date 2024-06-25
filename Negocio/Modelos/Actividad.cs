@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Negocio.Modelos
+﻿namespace Negocio.Modelos
 {
     public class Actividad
     {
@@ -14,7 +12,14 @@ namespace Negocio.Modelos
         }
 
         public Actividad(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
-            Profesor profesor) : this(nombre, descripcion, diasHorarios, costo, cupoMaximo)
+            int disponibilidad) : this(nombre, descripcion, diasHorarios, costo, cupoMaximo)
+        {
+            Disponibilidad = disponibilidad;
+        }
+
+        public Actividad(string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
+            int disponibilidad,
+            Profesor profesor) : this(nombre, descripcion, diasHorarios, costo, cupoMaximo, disponibilidad)
         {
             Profesor = profesor;
         }
@@ -34,8 +39,15 @@ namespace Negocio.Modelos
             CupoMaximo = cupoMaximo;
         }
 
+        public Actividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo,
+            int cupoMaximo, int disponibilidad) : this(id, nombre, descripcion, diasHorarios, costo, cupoMaximo)
+        {
+            Disponibilidad = disponibilidad;
+        }
+
         public Actividad(int id, string nombre, string descripcion, string diasHorarios, decimal costo, int cupoMaximo,
-            Profesor profesor) : this(id, nombre, descripcion, diasHorarios, costo, cupoMaximo)
+            int disponibilidad,
+            Profesor profesor) : this(id, nombre, descripcion, diasHorarios, costo, cupoMaximo, disponibilidad)
         {
             Profesor = profesor;
         }
@@ -46,12 +58,7 @@ namespace Negocio.Modelos
         public string DiasHorarios { get; set; }
         public decimal Costo { get; set; }
         public int CupoMaximo { get; set; }
+        public int Disponibilidad { get; set; }
         public Profesor Profesor { get; set; }
-        public List<Socio> Participantes { get; set; } = new List<Socio>();
-
-        public bool ConsultarDisponibilidad()
-        {
-            return false;
-        }
     }
 }
