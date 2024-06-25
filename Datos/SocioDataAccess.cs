@@ -21,6 +21,11 @@ namespace Datos
                 "SELECT * FROM Socios WHERE ID IN (SELECT SocioID FROM OrdenesPago WHERE Pagada = FALSE)");
         }
 
+        public DataTable GetSocioPorUsuario(string usuario)
+        {
+            return GetBy("Usuario = ?", new OleDbParameter("Usuario", usuario));
+        }
+
         public DataTable GetSociosSinOrden()
         {
             var query =
@@ -54,7 +59,7 @@ namespace Datos
                 Value = cuotaSocial.HasValue ? (object)cuotaSocial.Value : DBNull.Value
             };
 
-            return Insert(dni, nombre, apellido, cuotaSocialParameter);
+            return Insert(dni, nombre, apellido, cuotaSocialParameter, new OleDbParameter("Usuario", $"{nombre}{apellido}".ToLower()));
         }
 
         public bool Update(int id, int dni, string nombre, string apellido, decimal? cuotaSocial)

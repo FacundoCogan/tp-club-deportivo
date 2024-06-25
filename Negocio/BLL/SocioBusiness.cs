@@ -33,6 +33,13 @@ namespace Negocio.BLL
                     row.Field<string>("Apellido"));
         }
 
+        public Socio GetSocioPorUsuario(string usuario)
+        {
+            var dataTable = _socioDataAccess.GetSocioPorUsuario(usuario);
+
+            return dataTable.Rows.Count == 0 ? null : MapSocio(dataTable.Rows[0]);
+        }
+        
         public List<Socio> GetSociosSinPagar()
         {
             var dataTable = _socioDataAccess.GetSociosSinPagar();

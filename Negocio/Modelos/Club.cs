@@ -54,6 +54,11 @@ namespace Negocio.Modelos
             return _actividad.Eliminar(idActividad);
         }
 
+        public Socio BuscarUsuario(string usuario)
+        {
+            return _socio.GetSocioPorUsuario(usuario);
+        }
+
         public bool CrearSocio(int dni, string nombre, string apellido, decimal? cuotaSocial)
         {
             return _socio.Agregar(new Socio(dni, nombre, apellido, cuotaSocial));
