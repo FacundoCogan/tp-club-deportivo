@@ -1,4 +1,4 @@
-# TRABAJO PRÁCTICO: CLUB DEPORTIVO
+# TRABAJO PRÁCTICO: CLUB DEPORTIVO (2024)
 
 El sistema debe administrar las actividades deportivas del club.
 Las personas que realizan actividades deportivas en el club pueden ser socios del club, o 
